@@ -9,7 +9,8 @@ import {
   StandoffGoalOneColumnCase,
   StandoffGoalOnlyBeamPlacedCase,
   StandoffGoalStructure,
-} from "./Case.js";
+} from "./Element.js";
+import { generateRandomStandoffGoalStructureCase } from "./Case.js";
 
 // Initialize the scene when the page loads
 document.addEventListener("DOMContentLoaded", async () => {
@@ -61,14 +62,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const resources = new Resources();
 
-    const s = new StandoffGoalStructure(
-      new StandoffGoalBeamPlacedCase(
-        [new OrangePin(), new BluePin()],
-        [new RedPin(), new OrangePin()],
-        [new RedPin(), new BluePin()]
-      ),
-      45
-    );
+    // const s = new StandoffGoalStructure(
+    //   new StandoffGoalBeamPlacedCase(
+    //     [new OrangePin(), new BluePin()],
+    //     [new RedPin(), new OrangePin()],
+    //     [new RedPin(), new BluePin()]
+    //   ),
+    //   45
+    // );
+    const c = generateRandomStandoffGoalStructureCase("hard");
+    const s = new StandoffGoalStructure(c, Math.floor(Math.random() * 360));
     resources.use(s);
     await s.visualize(scene);
 
