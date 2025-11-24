@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js STL Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+        }
+        
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- <div id="info">
+            <h3>STL Viewer</h3>
+            <p>File: V5RC-PushBack-H2H-_-TileColor66_71@0.1 v19.stl</p>
+            <p>Auto-rotating: 360° every 16 seconds</p>
+            <p><strong>Click anywhere to toggle fullscreen</strong></p>
+            <p><small>Press F12 to open console for debug info</small></p>
+        </div> -->
+        <div id="loading">Loading STL file...</div>
+    </div>
+    <script type="module" src="/src/viqrc-live.ts"></script>
+</body>
+</html>
