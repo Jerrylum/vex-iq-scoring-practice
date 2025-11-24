@@ -39,18 +39,45 @@
             font-size: 18px;
             z-index: 100;
         }
+        
+        #reload-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 100;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        #reload-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        #reload-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        #reload-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
     </style>
 </head>
 <body>
     <div id="container">
-        <!-- <div id="info">
-            <h3>STL Viewer</h3>
-            <p>File: V5RC-PushBack-H2H-_-TileColor66_71@0.1 v19.stl</p>
-            <p>Auto-rotating: 360° every 16 seconds</p>
-            <p><strong>Click anywhere to toggle fullscreen</strong></p>
-            <p><small>Press F12 to open console for debug info</small></p>
-        </div> -->
-        <div id="loading">Loading STL file...</div>
+        <button id="reload-button">New Scenario</button>
+        <div id="loading">Loading scene...</div>
     </div>
     <script type="module" src="/src/viqrc-live.ts"></script>
 </body>
