@@ -1,0 +1,202 @@
+import * as THREE from "three";
+import { Structure, Element, Beam, Pin } from "../Element";
+import type { Scene } from "../Scene";
+
+function mulberry32(seed: number) {
+  return function () {
+    // debugger;
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+export class FloorGoalStructure extends Structure {
+  public readonly theCase: FloorGoalCase;
+  public readonly randomSeed: number;
+
+  constructor(theCase: FloorGoalCase, randomSeed: number) {
+    super();
+    this.theCase = theCase;
+    this.randomSeed = randomSeed;
+  }
+
+  public getElements(): Element[] {
+    return [
+      ...(this.theCase.getTopLeftColumn() ?? []),
+      ...(this.theCase.getTopRightColumn() ?? []),
+      ...(this.theCase.getBottomLeftColumn() ?? []),
+      ...(this.theCase.getBottomRightColumn() ?? []),
+    ];
+  }
+  public visualize(scene: Scene): Promise<void> {
+    return this.theCase.visualize(scene, this);
+  }
+}
+
+export abstract class FloorGoalCase {
+  public abstract getTopLeftColumn(): Pin[] | null;
+  public abstract isTopLeftColumnWithinArea(): boolean;
+  public abstract getTopRightColumn(): Pin[] | null;
+  public abstract isTopRightColumnWithinArea(): boolean;
+  public abstract getBottomLeftColumn(): Pin[] | null;
+  public abstract isBottomLeftColumnWithinArea(): boolean;
+  public abstract getBottomRightColumn(): Pin[] | null;
+  public abstract isBottomRightColumnWithinArea(): boolean;
+  public abstract visualize(
+    scene: Scene,
+    structure: FloorGoalStructure
+  ): Promise<void>;
+}
+
+export class FloorGoalEmptyCase extends FloorGoalCase {
+  public getTopLeftColumn(): Pin[] | null {
+    return null;
+  }
+  public isTopLeftColumnWithinArea(): boolean {
+    return false;
+  }
+  public getTopRightColumn(): Pin[] | null {
+    return null;
+  }
+  public isTopRightColumnWithinArea(): boolean {
+    return false;
+  }
+  public getBottomLeftColumn(): Pin[] | null {
+    return null;
+  }
+  public isBottomLeftColumnWithinArea(): boolean {
+    return false;
+  }
+  public getBottomRightColumn(): Pin[] | null {
+    return null;
+  }
+  public isBottomRightColumnWithinArea(): boolean {
+    return false;
+  }
+  public visualize(scene: Scene, structure: FloorGoalStructure): Promise<void> {
+    return Promise.resolve();
+  }
+}
+
+export class FloorGoalWithColumnsCase extends FloorGoalCase {
+  private readonly topLeftColumn: Pin[];
+  private readonly _isTopLeftColumnWithinArea: boolean;
+  private readonly topRightColumn: Pin[];
+  private readonly _isTopRightColumnWithinArea: boolean;
+  private readonly bottomLeftColumn: Pin[];
+  private readonly _isBottomLeftColumnWithinArea: boolean;
+  private readonly bottomRightColumn: Pin[];
+  private readonly _isBottomRightColumnWithinArea: boolean;
+
+  constructor(
+    topLeftColumn: Pin[],
+    isTopLeftColumnWithinArea: boolean,
+    topRightColumn: Pin[],
+    isTopRightColumnWithinArea: boolean,
+    bottomLeftColumn: Pin[],
+    isBottomLeftColumnWithinArea: boolean,
+    bottomRightColumn: Pin[],
+    isBottomRightColumnWithinArea: boolean
+  ) {
+    super();
+    this.topLeftColumn = topLeftColumn;
+    this._isTopLeftColumnWithinArea = isTopLeftColumnWithinArea;
+    this.topRightColumn = topRightColumn;
+    this._isTopRightColumnWithinArea = isTopRightColumnWithinArea;
+    this.bottomLeftColumn = bottomLeftColumn;
+    this._isBottomLeftColumnWithinArea = isBottomLeftColumnWithinArea;
+    this.bottomRightColumn = bottomRightColumn;
+    this._isBottomRightColumnWithinArea = isBottomRightColumnWithinArea;
+  }
+
+  public getTopLeftColumn(): Pin[] | null {
+    return this.topLeftColumn;
+  }
+  public isTopLeftColumnWithinArea(): boolean {
+    return this._isTopLeftColumnWithinArea;
+  }
+  public getTopRightColumn(): Pin[] | null {
+    return this.topRightColumn;
+  }
+  public isTopRightColumnWithinArea(): boolean {
+    return this._isTopRightColumnWithinArea;
+  }
+  public getBottomLeftColumn(): Pin[] | null {
+    return this.bottomLeftColumn;
+  }
+  public isBottomLeftColumnWithinArea(): boolean {
+    return this._isBottomLeftColumnWithinArea;
+  }
+  public getBottomRightColumn(): Pin[] | null {
+    return this.bottomRightColumn;
+  }
+  public isBottomRightColumnWithinArea(): boolean {
+    return this._isBottomRightColumnWithinArea;
+  }
+
+  public async visualize(
+    scene: Scene,
+    structure: FloorGoalStructure
+  ): Promise<void> {
+    // random generator
+    const random = mulberry32(structure.randomSeed);
+
+    let y = -114;
+    let a = this.isTopLeftColumnWithinArea() ? -2 : 1;
+    let b = random() * 5 * a;
+    let c = random() * 5 * a;
+
+    for (const pin of this.topLeftColumn) {
+      await scene.addPin(
+        pin.color,
+        new THREE.Vector3(-115 - b, y, 115 + c),
+        new THREE.Euler(0, 90, 0)
+      );
+      y += 60;
+    }
+
+    y = -114;
+    a = this.isTopRightColumnWithinArea() ? -2 : 1;
+    b = random() * 5 * a;
+    c = random() * 5 * a;
+
+    for (const pin of this.topRightColumn) {
+      await scene.addPin(
+        pin.color,
+        new THREE.Vector3(-115 - b, y, -115 - c),
+        new THREE.Euler(0, 90, 0)
+      );
+      y += 60;
+    }
+
+    y = -114;
+    a = this.isBottomLeftColumnWithinArea() ? -2 : 1;
+    b = random() * 5 * a;
+    c = random() * 5 * a;
+
+    for (const pin of this.bottomLeftColumn) {
+      await scene.addPin(
+        pin.color,
+        new THREE.Vector3(115 + b, y, 115 + c),
+        new THREE.Euler(0, 90, 0)
+      );
+      y += 60;
+    }
+
+    y = -114;
+    a = this.isBottomRightColumnWithinArea() ? -2 : 1;
+    b = random() * 5 * a;
+    c = random() * 5 * a;
+
+    for (const pin of this.bottomRightColumn) {
+      await scene.addPin(
+        pin.color,
+        new THREE.Vector3(115 + b, y, -115 - c),
+        new THREE.Euler(0, 90, 0)
+      );
+      y += 60;
+    }
+  }
+}

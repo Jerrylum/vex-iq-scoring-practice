@@ -5,12 +5,15 @@ import {
   OrangePin,
   RedPin,
   Resources,
+} from "./Element.js";
+import {
   StandoffGoalBeamPlacedCase,
   StandoffGoalOneColumnCase,
-  StandoffGoalOnlyBeamPlacedCase,
-  StandoffGoalStructure,
-} from "./Element.js";
-import { generateRandomStandoffGoalStructureCase } from "./Case.js";
+  StandoffGoalOnlyBeamPlacedCase
+} from "./structure/StandoffGoalStructure.js";
+import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
+import { generateRandomFloorGoalStructureCase, generateRandomStandoffGoalStructureCase } from "./Generator.js";
+import { FloorGoalStructure, FloorGoalWithColumnsCase } from "./structure/FloorGoalStructure.js";
 
 let currentScene: Scene | null = null;
 
@@ -56,6 +59,13 @@ async function generateNewScenario(scene: Scene) {
   const s = new StandoffGoalStructure(c, Math.floor(Math.random() * 360));
   resources.use(s);
   await s.visualize(scene);
+
+  const c2 = generateRandomFloorGoalStructureCase("hard");
+  const s2 = new FloorGoalStructure(c2, Math.floor(Math.random() * 1000000000));
+  resources.use(s2);
+  await s2.visualize(scene);
+
+
 
   console.log("All game objects added successfully");
 }

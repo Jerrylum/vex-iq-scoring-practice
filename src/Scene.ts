@@ -121,7 +121,7 @@ export class Scene {
 
     const pin = new PinObject(model, color, instanceId);
     // reverse x and z
-    pin.setPosition(new THREE.Vector3(-position.x, position.y, -position.z));
+    pin.setPosition(position);
     pin.setRotation(rotation);
 
     this.renderer.scene.add(pin.getObject());
@@ -146,7 +146,7 @@ export class Scene {
     const beam = new BeamObject(model, this.beamCounter);
     this.beamCounter++;
 
-    beam.setPosition(new THREE.Vector3(-position.x, position.y, -position.z));
+    beam.setPosition(position);
     beam.setRotation(rotation);
 
     this.renderer.scene.add(beam.getObject());
