@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { Renderer } from "./Renderer.js";
 import { ModelLoader } from "./ModelLoader.js";
-import { Pin, Beam, Field, GameObject } from "./GameObject.js";
+import { PinObject, BeamObject, Field, GameObject } from "./GameObject.js";
 
 export type PinColor = "red" | "blue" | "orange";
 
@@ -82,8 +82,8 @@ export class Scene {
         "BluePin"
       ),
       this.modelLoader.loadModel(
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OranglePin.obj",
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OranglePin.mtl",
+        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OrangePin.obj",
+        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OrangePin.mtl",
         "OrangePin"
       ),
       this.modelLoader.loadModel(
@@ -100,12 +100,12 @@ export class Scene {
     color: PinColor,
     position: THREE.Vector3,
     rotation: THREE.Euler = new THREE.Euler(0, 0, 0)
-  ): Promise<Pin> {
+  ): Promise<PinObject> {
     // Get the appropriate model path
     const colorMap = {
       red: "RedPin",
       blue: "BluePin",
-      orange: "OranglePin",
+      orange: "OrangePin",
     };
 
     const modelName = colorMap[color];
@@ -119,8 +119,9 @@ export class Scene {
     const instanceId = this.pinCounter.get(color)!;
     this.pinCounter.set(color, instanceId + 1);
 
-    const pin = new Pin(model, color, instanceId);
-    pin.setPosition(position);
+    const pin = new PinObject(model, color, instanceId);
+    // reverse x and z
+    pin.setPosition(new THREE.Vector3(-position.x, position.y, -position.z));
     pin.setRotation(rotation);
 
     this.renderer.scene.add(pin.getObject());
@@ -133,7 +134,7 @@ export class Scene {
   public async addBeam(
     position: THREE.Vector3,
     rotation: THREE.Euler = new THREE.Euler(0, 0, 0)
-  ): Promise<Beam> {
+  ): Promise<BeamObject> {
     // Load beam model (will use cache if already loaded)
     const model = await this.modelLoader.loadModel(
       "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj",
@@ -142,10 +143,10 @@ export class Scene {
     );
 
     // Create beam instance
-    const beam = new Beam(model, this.beamCounter);
+    const beam = new BeamObject(model, this.beamCounter);
     this.beamCounter++;
 
-    beam.setPosition(position);
+    beam.setPosition(new THREE.Vector3(-position.x, position.y, -position.z));
     beam.setRotation(rotation);
 
     this.renderer.scene.add(beam.getObject());

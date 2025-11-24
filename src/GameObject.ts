@@ -32,7 +32,7 @@ export abstract class GameObject {
   }
 }
 
-export class Pin extends GameObject {
+export class PinObject extends GameObject {
   constructor(model: THREE.Group, color: string, instanceId: number) {
     super(model, `${color}Pin_${instanceId}`);
     this.prepareModel();
@@ -54,7 +54,7 @@ export class Pin extends GameObject {
   }
 }
 
-export class Beam extends GameObject {
+export class BeamObject extends GameObject {
   constructor(model: THREE.Group, instanceId: number) {
     super(model, `Beam_${instanceId}`);
     this.prepareModel();
