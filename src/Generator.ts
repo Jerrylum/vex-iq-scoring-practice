@@ -1,6 +1,11 @@
 import { BluePin, OrangePin, RedPin, type Pin } from "./Element";
 import type { PinColor } from "./Scene";
 import {
+  BeamWithColumnsCase,
+  BeamWithTwoBottomColumnsCase,
+  JustBeamOnFloorCase,
+} from "./structure/BeamOnFloorStructure";
+import {
   BlueSquareGoalEmptyCase,
   BlueSquareGoalWithOneColumnCase,
 } from "./structure/BlueSquareGoal";
@@ -234,4 +239,40 @@ export function generateRandomStartingPinStructureCase(level: Level) {
     Math.random() < 0.5,
     Math.random() < 0.5
   );
+}
+
+export function generateRandomBeamOnFloorStructureCase(level: Level) {
+  const caseType = Math.random();
+  if (level === "easy") {
+    if (caseType < 0.7) {
+      return new JustBeamOnFloorCase();
+    } else {
+      return new BeamWithColumnsCase(
+        generatePins(1, 2),
+        generatePins(1, 2),
+        generatePins(1, 2)
+      );
+    }
+  } else {
+    if (caseType < 0.3) {
+      const bottomLength = Math.floor(Math.random() * 2) + 1;
+      return new BeamWithTwoBottomColumnsCase(
+        generatePins(bottomLength, bottomLength),
+        generatePins(bottomLength, bottomLength),
+        generatePins(1, 2)
+      );
+    } else if (caseType < 0.6) {
+      return new BeamWithColumnsCase(
+        [],
+        generatePins(1, 2),
+        generatePins(1, 2)
+      );
+    } else {
+      return new BeamWithColumnsCase(
+        generatePins(1, 2),
+        generatePins(1, 2),
+        generatePins(1, 2)
+      );
+    }
+  }
 }

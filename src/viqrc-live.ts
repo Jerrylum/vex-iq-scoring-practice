@@ -1,7 +1,8 @@
 import { Scene } from "./Scene.js";
-import { Resources } from "./Element.js";
+import { BluePin, OrangePin, RedPin, Resources } from "./Element.js";
 import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
 import {
+  generateRandomBeamOnFloorStructureCase,
   generateRandomBlueSquareGoalStructureCase,
   generateRandomBlueTriangleGoalStructureCase,
   generateRandomFloorGoalStructureCase,
@@ -10,16 +11,21 @@ import {
   generateRandomStandoffGoalStructureCase,
   generateRandomStartingPinStructureCase,
 } from "./Generator.js";
-import {
-  FloorGoalStructure,
-} from "./structure/FloorGoalStructure.js";
-import {
-  BlueSquareGoal,
-} from "./structure/BlueSquareGoal.js";
+import { FloorGoalStructure } from "./structure/FloorGoalStructure.js";
+import { BlueSquareGoal } from "./structure/BlueSquareGoal.js";
 import { RedSquareGoal } from "./structure/RedSquareGoal.js";
 import { RedTriangleGoal } from "./structure/RedTriangleGoal.js";
 import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
-import { StartingPinCase, StartingPinStructure } from "./structure/StartingPinStructure.js";
+import {
+  StartingPinCase,
+  StartingPinStructure,
+} from "./structure/StartingPinStructure.js";
+import {
+  JustBeamOnFloorCase,
+  BeamOnFloorStructure,
+  BeamWithColumnsCase,
+  BeamWithTwoBottomColumnsCase,
+} from "./structure/BeamOnFloorStructure.js";
 
 let currentScene: Scene | null = null;
 
@@ -94,6 +100,14 @@ async function generateNewScenario(scene: Scene) {
   const s7 = new StartingPinStructure(c7);
   resources.use(s7);
   await s7.visualize(scene);
+
+  const c8 = generateRandomBeamOnFloorStructureCase("hard");
+  const s8 = new BeamOnFloorStructure(
+    c8,
+    Math.floor(Math.random() * 1000000000)
+  );
+  resources.use(s8);
+  await s8.visualize(scene);
 
   console.log("All game objects added successfully");
 }
