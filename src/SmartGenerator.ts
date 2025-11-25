@@ -15,6 +15,7 @@ import { RedSquareGoal } from "./structure/RedSquareGoal.js";
 import { RedTriangleGoal } from "./structure/RedTriangleGoal.js";
 import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
 import { StartingPinStructure } from "./structure/StartingPinStructure.js";
+import { StacksOnFloorStructure } from "./structure/StacksOnFloorStructure.js";
 import {
   generateRandomBeamOnFloorStructureCase,
   generateRandomBlueSquareGoalStructureCase,
@@ -22,6 +23,7 @@ import {
   generateRandomFloorGoalStructureCase,
   generateRandomRedSquareGoalStructureCase,
   generateRandomRedTriangleGoalStructureCase,
+  generateRandomStacksOnFloorCase,
   generateRandomStandoffGoalStructureCase,
   generateRandomStartingPinStructureCase,
 } from "./Generator.js";
@@ -131,9 +133,15 @@ export class SmartScenarioGenerator {
       return null;
     }
 
-    for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
+    for (
+      let attempt = 0;
+      attempt < this.getMaxAttemptsForStructure();
+      attempt++
+    ) {
       try {
-        const caseData = generateRandomStandoffGoalStructureCase(this.difficulty);
+        const caseData = generateRandomStandoffGoalStructureCase(
+          this.difficulty
+        );
         const structure = new StandoffGoalStructure(
           caseData,
           Math.floor(Math.random() * 360)
@@ -143,7 +151,10 @@ export class SmartScenarioGenerator {
         const pins = elements.filter((e) => e instanceof Pin) as Pin[];
         const beamCount = elements.filter((e) => !(e instanceof Pin)).length;
 
-        if (this.tracker.canAfford(pins) && this.tracker.canAffordBeams(beamCount)) {
+        if (
+          this.tracker.canAfford(pins) &&
+          this.tracker.canAffordBeams(beamCount)
+        ) {
           this.tracker.use(pins, beamCount);
           return structure;
         }
@@ -161,9 +172,15 @@ export class SmartScenarioGenerator {
       return null;
     }
 
-    for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
+    for (
+      let attempt = 0;
+      attempt < this.getMaxAttemptsForStructure();
+      attempt++
+    ) {
       try {
-        const caseData = generateRandomBeamOnFloorStructureCase(this.difficulty);
+        const caseData = generateRandomBeamOnFloorStructureCase(
+          this.difficulty
+        );
         const structure = new BeamOnFloorStructure(
           caseData,
           Math.floor(Math.random() * 1000000000)
@@ -173,7 +190,10 @@ export class SmartScenarioGenerator {
         const pins = elements.filter((e) => e instanceof Pin) as Pin[];
         const beamCount = elements.filter((e) => !(e instanceof Pin)).length;
 
-        if (this.tracker.canAfford(pins) && this.tracker.canAffordBeams(beamCount)) {
+        if (
+          this.tracker.canAfford(pins) &&
+          this.tracker.canAffordBeams(beamCount)
+        ) {
           this.tracker.use(pins, beamCount);
           return structure;
         }
@@ -189,7 +209,11 @@ export class SmartScenarioGenerator {
     const availableColors = this.tracker.getAvailableColors();
     if (availableColors.length === 0) return null;
 
-    for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
+    for (
+      let attempt = 0;
+      attempt < this.getMaxAttemptsForStructure();
+      attempt++
+    ) {
       try {
         const caseData = generateRandomFloorGoalStructureCase(this.difficulty);
         const structure = new FloorGoalStructure(
@@ -220,7 +244,10 @@ export class SmartScenarioGenerator {
     // Try with decreasing complexity
     for (let pinCount = 3; pinCount >= 1; pinCount--) {
       try {
-        const pins = generateColumnWithAvailableColors(availableColors, pinCount);
+        const pins = generateColumnWithAvailableColors(
+          availableColors,
+          pinCount
+        );
         if (pins.length > 0 && this.tracker.canAfford(pins)) {
           // Create a simple case manually
           const simpleCaseData = generateRandomFloorGoalStructureCase("easy");
@@ -228,7 +255,7 @@ export class SmartScenarioGenerator {
             simpleCaseData,
             Math.floor(Math.random() * 1000000000)
           );
-          
+
           this.tracker.use(pins);
           return structure;
         }
@@ -243,28 +270,32 @@ export class SmartScenarioGenerator {
   private generateBlueSquareGoal(): Structure | null {
     return this.generateGoalStructure(
       () => generateRandomBlueSquareGoalStructureCase(this.difficulty),
-      (caseData) => new BlueSquareGoal(caseData, Math.floor(Math.random() * 1000000000))
+      (caseData) =>
+        new BlueSquareGoal(caseData, Math.floor(Math.random() * 1000000000))
     );
   }
 
   private generateRedSquareGoal(): Structure | null {
     return this.generateGoalStructure(
       () => generateRandomRedSquareGoalStructureCase(this.difficulty),
-      (caseData) => new RedSquareGoal(caseData, Math.floor(Math.random() * 1000000000))
+      (caseData) =>
+        new RedSquareGoal(caseData, Math.floor(Math.random() * 1000000000))
     );
   }
 
   private generateRedTriangleGoal(): Structure | null {
     return this.generateGoalStructure(
       () => generateRandomRedTriangleGoalStructureCase(this.difficulty),
-      (caseData) => new RedTriangleGoal(caseData, Math.floor(Math.random() * 1000000000))
+      (caseData) =>
+        new RedTriangleGoal(caseData, Math.floor(Math.random() * 1000000000))
     );
   }
 
   private generateBlueTriangleGoal(): Structure | null {
     return this.generateGoalStructure(
       () => generateRandomBlueTriangleGoalStructureCase(this.difficulty),
-      (caseData) => new BlueTriangleGoal(caseData, Math.floor(Math.random() * 1000000000))
+      (caseData) =>
+        new BlueTriangleGoal(caseData, Math.floor(Math.random() * 1000000000))
     );
   }
 
@@ -275,7 +306,11 @@ export class SmartScenarioGenerator {
     const availableColors = this.tracker.getAvailableColors();
     if (availableColors.length === 0) return null;
 
-    for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
+    for (
+      let attempt = 0;
+      attempt < this.getMaxAttemptsForStructure();
+      attempt++
+    ) {
       try {
         const caseData = generateCase();
         const structure = createStructure(caseData);
@@ -295,13 +330,48 @@ export class SmartScenarioGenerator {
     return null;
   }
 
+  private generateStacksOnFloor(): Structure | null {
+    const availableColors = this.tracker.getAvailableColors();
+    if (availableColors.length === 0) return null;
+
+    const available = this.tracker.getAvailable();
+
+    try {
+      const caseData = generateRandomStacksOnFloorCase(
+        this.difficulty,
+        available.red,
+        available.blue,
+        available.orange
+      );
+      const structure = new StacksOnFloorStructure(caseData);
+
+      const elements = structure.getElements();
+      const pins = elements.filter((e) => e instanceof Pin) as Pin[];
+
+      if (this.tracker.canAfford(pins)) {
+        this.tracker.use(pins);
+        return structure;
+      }
+    } catch (e) {
+      console.warn("Failed to generate stacks on floor:", e);
+    }
+
+    return null;
+  }
+
   private generateStartingPin(): Structure | null {
     const availableColors = this.tracker.getAvailableColors();
     if (availableColors.length === 0) return null;
 
-    for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
+    for (
+      let attempt = 0;
+      attempt < this.getMaxAttemptsForStructure();
+      attempt++
+    ) {
       try {
-        const caseData = generateRandomStartingPinStructureCase(this.difficulty);
+        const caseData = generateRandomStartingPinStructureCase(
+          this.difficulty
+        );
         const structure = new StartingPinStructure(caseData);
 
         const elements = structure.getElements();
@@ -349,12 +419,13 @@ export class SmartScenarioGenerator {
       console.warn("Failed to generate FloorGoal");
     }
 
-    // 4-7. Generate Square and Triangle Goals (order randomized)
+    // 4-8. Generate Square Goals, Triangle Goals, and Stacks on Floor (order randomized)
     const goalGenerators = [
       { name: "BlueSquareGoal", fn: () => this.generateBlueSquareGoal() },
       { name: "RedSquareGoal", fn: () => this.generateRedSquareGoal() },
       { name: "RedTriangleGoal", fn: () => this.generateRedTriangleGoal() },
       { name: "BlueTriangleGoal", fn: () => this.generateBlueTriangleGoal() },
+      { name: "StacksOnFloor", fn: () => this.generateStacksOnFloor() },
     ];
 
     // Shuffle to randomize order
@@ -370,7 +441,7 @@ export class SmartScenarioGenerator {
       }
     }
 
-    // 8. Generate Starting Pin (lowest priority)
+    // 9. Generate Starting Pin (lowest priority)
     const startingPin = this.generateStartingPin();
     if (startingPin) {
       structures.push(startingPin);
@@ -381,7 +452,7 @@ export class SmartScenarioGenerator {
 
     const available = this.tracker.getAvailable();
     console.log("Resources remaining:", available);
-    console.log(`Total structures generated: ${structures.length}/8`);
+    console.log(`Total structures generated: ${structures.length}/9`);
 
     return structures;
   }
@@ -391,4 +462,3 @@ export function generateSmartScenario(difficulty: Difficulty): Structure[] {
   const generator = new SmartScenarioGenerator(difficulty);
   return generator.generate();
 }
-

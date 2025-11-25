@@ -25,6 +25,7 @@ import {
   RedTriangleGoalEmptyCase,
   RedTriangleGoalWithColumnsCase,
 } from "./structure/RedTriangleGoal";
+import { StacksOnFloorCase } from "./structure/StacksOnFloorStructure";
 import {
   StandoffGoalBeamPlacedCase,
   StandoffGoalEmptyCase,
@@ -280,4 +281,127 @@ export function generateRandomBeamOnFloorStructureCase(level: Level) {
       );
     }
   }
+}
+
+export function generateRandomStacksOnFloorCase(
+  difficulty: "easy" | "medium" | "hard",
+  availableRed: number,
+  availableBlue: number,
+  availableOrange: number
+): StacksOnFloorCase {
+  // Determine number of stacks based on difficulty and available resources
+  let maxStacks: number;
+  let pinsPerStack: number[];
+
+  switch (difficulty) {
+    case "easy":
+      maxStacks = Math.floor(Math.random() * 2);
+      pinsPerStack = Array.from(
+        { length: maxStacks },
+        () => Math.floor(Math.random() * 2) + 2
+      );
+      break;
+    default:
+      maxStacks = Math.floor(Math.random() * 4);
+      pinsPerStack = Array.from(
+        { length: maxStacks },
+        () => Math.floor(Math.random() * 2) + 2
+      );
+      break;
+  }
+
+  // Adjust maxStacks based on available resources
+  const totalPinsNeeded = pinsPerStack
+    .slice(0, maxStacks)
+    .reduce((a, b) => a + b, 0);
+  const totalPinsAvailable = availableRed + availableBlue + availableOrange;
+
+  if (totalPinsNeeded > totalPinsAvailable) {
+    // Reduce stacks if not enough resources
+    maxStacks = Math.min(maxStacks, Math.floor(totalPinsAvailable / 2));
+  }
+
+  // Ensure at least 0 stacks (can be empty)
+  maxStacks = Math.max(0, maxStacks);
+
+  const stacks: Pin[][] = [];
+  const availableColors: Array<() => Pin> = [];
+
+  if (availableRed > 0) {
+    for (let i = 0; i < availableRed; i++) {
+      availableColors.push(() => new RedPin());
+    }
+  }
+  if (availableBlue > 0) {
+    for (let i = 0; i < availableBlue; i++) {
+      availableColors.push(() => new BluePin());
+    }
+  }
+  if (availableOrange > 0) {
+    for (let i = 0; i < availableOrange; i++) {
+      availableColors.push(() => new OrangePin());
+    }
+  }
+
+  // Shuffle available colors for randomness
+  availableColors.sort(() => Math.random() - 0.5);
+
+  let colorIndex = 0;
+
+  for (let i = 0; i < maxStacks; i++) {
+    const stackSize = pinsPerStack[i] || 2;
+    const stack: Pin[] = [];
+
+    // Try to use different colors in each stack for variety
+    const usedColorsInStack = new Set<string>();
+
+    for (let j = 0; j < stackSize && colorIndex < availableColors.length; j++) {
+      const colorFactory = availableColors[colorIndex];
+      if (!colorFactory) continue;
+
+      const pin = colorFactory();
+
+      // Try to avoid using same color twice in a stack if possible
+      if (
+        usedColorsInStack.has(pin.color) &&
+        colorIndex < availableColors.length - 1
+      ) {
+        // Look ahead for a different color
+        for (
+          let k = colorIndex + 1;
+          k < Math.min(colorIndex + 10, availableColors.length);
+          k++
+        ) {
+          const nextFactory = availableColors[k];
+          if (!nextFactory) continue;
+
+          const nextPin = nextFactory();
+          if (!usedColorsInStack.has(nextPin.color)) {
+            // Swap
+            const temp = availableColors[colorIndex];
+            const swapFactory = availableColors[k];
+            if (temp && swapFactory) {
+              availableColors[colorIndex] = swapFactory;
+              availableColors[k] = temp;
+            }
+            break;
+          }
+        }
+      }
+
+      const finalFactory = availableColors[colorIndex];
+      if (finalFactory) {
+        const finalPin = finalFactory();
+        stack.push(finalPin);
+        usedColorsInStack.add(finalPin.color);
+      }
+      colorIndex++;
+    }
+
+    if (stack.length > 0) {
+      stacks.push(stack);
+    }
+  }
+
+  return new StacksOnFloorCase(stacks);
 }
