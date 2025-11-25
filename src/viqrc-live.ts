@@ -1,115 +1,25 @@
 import { Scene } from "./Scene.js";
-import { BluePin, OrangePin, RedPin, Resources } from "./Element.js";
-import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
-import {
-  generateRandomBeamOnFloorStructureCase,
-  generateRandomBlueSquareGoalStructureCase,
-  generateRandomBlueTriangleGoalStructureCase,
-  generateRandomFloorGoalStructureCase,
-  generateRandomRedSquareGoalStructureCase,
-  generateRandomRedTriangleGoalStructureCase,
-  generateRandomStandoffGoalStructureCase,
-  generateRandomStartingPinStructureCase,
-} from "./Generator.js";
-import { FloorGoalStructure } from "./structure/FloorGoalStructure.js";
-import { BlueSquareGoal } from "./structure/BlueSquareGoal.js";
-import { RedSquareGoal } from "./structure/RedSquareGoal.js";
-import { RedTriangleGoal } from "./structure/RedTriangleGoal.js";
-import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
-import {
-  StartingPinCase,
-  StartingPinStructure,
-} from "./structure/StartingPinStructure.js";
-import {
-  JustBeamOnFloorCase,
-  BeamOnFloorStructure,
-  BeamWithColumnsCase,
-  BeamWithTwoBottomColumnsCase,
-} from "./structure/BeamOnFloorStructure.js";
+import { generateSmartScenario, type Difficulty } from "./SmartGenerator.js";
 
 let currentScene: Scene | null = null;
+let currentDifficulty: Difficulty = "hard";
 
 async function generateNewScenario(scene: Scene) {
-  // Add game objects to the scene
-  // Add two red pins
-  // await scene.addPin(
-  //   "red",
-  //   new THREE.Vector3(50, 0, 50),
-  //   new THREE.Euler(0, 0, 0)
-  // );
+  console.log(`\n=== Generating new scenario (difficulty: ${currentDifficulty}) ===`);
+  
+  // Generate all structures with smart resource management
+  const structures = generateSmartScenario(currentDifficulty);
 
-  // await scene.addPin(
-  //   "red",
-  //   new THREE.Vector3(140 + 12 * 25.4, 0, 50),
-  //   new THREE.Euler(0, 0, 0)
-  // );
+  // Visualize all structures
+  for (const structure of structures) {
+    try {
+      await structure.visualize(scene);
+    } catch (error) {
+      console.error("Failed to visualize structure:", error);
+    }
+  }
 
-  // Add one blue pin
-  // await scene.addPin(
-  //   "blue",
-  //   new THREE.Vector3(-50, 0, 50),
-  //   new THREE.Euler(0, 0, 90)
-  // );
-
-  // await scene.addPin(
-  //   "blue",
-  //   new THREE.Vector3(0, 74, 0),
-  //   new THREE.Euler(0, 0, 0)
-  // );
-
-  // Add a beam (example)
-  // await scene.addBeam(
-  //   new THREE.Vector3(0, 74, 0),
-  //   new THREE.Euler(0, 0, 0)
-  // );
-
-  const resources = new Resources();
-
-  const c = generateRandomStandoffGoalStructureCase("hard");
-  const s = new StandoffGoalStructure(c, Math.floor(Math.random() * 360));
-  resources.use(s);
-  await s.visualize(scene);
-
-  const c2 = generateRandomFloorGoalStructureCase("hard");
-  const s2 = new FloorGoalStructure(c2, Math.floor(Math.random() * 1000000000));
-  resources.use(s2);
-  await s2.visualize(scene);
-
-  // const c3 = new BlueSquareGoalWithOneColumnCase([new BluePin(), new RedPin()]);
-  const c3 = generateRandomBlueSquareGoalStructureCase("hard");
-  const s3 = new BlueSquareGoal(c3, Math.floor(Math.random() * 1000000000));
-  resources.use(s3);
-  await s3.visualize(scene);
-
-  const c4 = generateRandomRedSquareGoalStructureCase("hard");
-  const s4 = new RedSquareGoal(c4, Math.floor(Math.random() * 1000000000));
-  resources.use(s4);
-  await s4.visualize(scene);
-
-  const c5 = generateRandomRedTriangleGoalStructureCase("hard");
-  const s5 = new RedTriangleGoal(c5, Math.floor(Math.random() * 1000000000));
-  resources.use(s5);
-  await s5.visualize(scene);
-
-  const c6 = generateRandomBlueTriangleGoalStructureCase("hard");
-  const s6 = new BlueTriangleGoal(c6, Math.floor(Math.random() * 1000000000));
-  resources.use(s6);
-  await s6.visualize(scene);
-
-  const c7 = generateRandomStartingPinStructureCase("hard");
-  const s7 = new StartingPinStructure(c7);
-  resources.use(s7);
-  await s7.visualize(scene);
-
-  const c8 = generateRandomBeamOnFloorStructureCase("hard");
-  const s8 = new BeamOnFloorStructure(
-    c8,
-    Math.floor(Math.random() * 1000000000)
-  );
-  resources.use(s8);
-  await s8.visualize(scene);
-
-  console.log("All game objects added successfully");
+  console.log(`\n=== Scenario generation complete: ${structures.length} structures created ===\n`);
 }
 
 async function reloadScenario() {
@@ -118,9 +28,16 @@ async function reloadScenario() {
   const reloadButton = document.getElementById(
     "reload-button"
   ) as HTMLButtonElement;
+  const difficultySelect = document.getElementById(
+    "difficulty-select"
+  ) as HTMLSelectElement;
+
   if (reloadButton) {
     reloadButton.disabled = true;
     reloadButton.textContent = "Loading...";
+  }
+  if (difficultySelect) {
+    difficultySelect.disabled = true;
   }
 
   try {
@@ -138,6 +55,9 @@ async function reloadScenario() {
     if (reloadButton) {
       reloadButton.disabled = false;
       reloadButton.textContent = "New Scenario";
+    }
+    if (difficultySelect) {
+      difficultySelect.disabled = false;
     }
   }
 }
@@ -158,6 +78,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const reloadButton = document.getElementById("reload-button");
     if (reloadButton) {
       reloadButton.addEventListener("click", reloadScenario);
+    }
+
+    // Setup difficulty selector
+    const difficultySelect = document.getElementById("difficulty-select") as HTMLSelectElement;
+    if (difficultySelect) {
+      difficultySelect.addEventListener("change", (event) => {
+        const target = event.target as HTMLSelectElement;
+        currentDifficulty = target.value as Difficulty;
+        console.log(`Difficulty changed to: ${currentDifficulty}`);
+      });
     }
   } catch (error) {
     console.error("Failed to initialize scene:", error);

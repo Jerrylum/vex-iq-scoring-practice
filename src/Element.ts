@@ -58,10 +58,10 @@ export class Resources {
 
   public use(structure: Structure): void {
     const elements = structure.getElements();
-    let redPinsCount = 0;
-    let bluePinsCount = 0;
-    let orangePinsCount = 0;
-    let beamsCount = 0;
+    let redPinsCount = this.redPinsUsed;
+    let bluePinsCount = this.bluePinsUsed;
+    let orangePinsCount = this.orangePinsUsed;
+    let beamsCount = this.beamsUsed;
     for (const element of elements) {
       if (element instanceof RedPin) {
         redPinsCount++;
@@ -87,12 +87,6 @@ export class Resources {
           throw new Error("Beams count exceeds max count");
         }
       }
-    }
-    if (
-      redPinsCount + bluePinsCount + orangePinsCount + beamsCount !==
-      elements.length
-    ) {
-      throw new Error("Elements count does not match");
     }
     this.redPinsUsed += redPinsCount;
     this.bluePinsUsed += bluePinsCount;

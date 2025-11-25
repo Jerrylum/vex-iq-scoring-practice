@@ -71,7 +71,12 @@ export function generatePinsWithPreferredBottom(
     pins.push(new OrangePin());
   }
   for (let i = 0; i < count - 1; i++) {
-    pins.push(generateRandomPin());
+    const pin = generateRandomPin();
+    if (pin.color !== preferredBottomColor || Math.random() < 0.2) {
+      pins.push(pin);
+    } else {
+      i--;
+    }
   }
   return pins as Pin[];
 }
@@ -109,36 +114,36 @@ export function generateRandomFloorGoalStructureCase(level: Level) {
       return new FloorGoalEmptyCase();
     } else {
       return new FloorGoalWithColumnsCase(
-        generatePins(1, 3),
+        Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
         true,
-        generatePins(1, 3),
+        Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
         true,
-        generatePins(1, 3),
+        Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
         true,
-        generatePins(1, 3),
+        Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
         true
       );
     }
   } else if (level === "medium") {
     return new FloorGoalWithColumnsCase(
-      generatePins(0, 3),
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
       true,
-      generatePins(0, 3),
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
       true,
-      generatePins(0, 3),
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
       true,
-      generatePins(0, 3),
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "orange") : [],
       true
     );
   } else {
     return new FloorGoalWithColumnsCase(
-      generatePinsWithPreferredBottom(3, "orange"),
+      generatePins(2, 3),
       Math.random() < 0.8,
-      generatePinsWithPreferredBottom(3, "orange"),
+      generatePins(2, 3),
       Math.random() < 0.8,
-      generatePinsWithPreferredBottom(3, "orange"),
+      generatePins(2, 3),
       Math.random() < 0.8,
-      generatePinsWithPreferredBottom(3, "orange"),
+      generatePins(2, 3),
       Math.random() < 0.8
     );
   }
@@ -195,8 +200,8 @@ export function generateRandomRedTriangleGoalStructureCase(level: Level) {
   } else {
     return new RedTriangleGoalWithColumnsCase(
       generatePinsWithPreferredBottom(3, "red"),
-      generatePinsWithPreferredBottom(3, "red"),
-      generatePinsWithPreferredBottom(3, "red")
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "red") : [],
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "red") : []
     );
   }
 }
@@ -211,15 +216,15 @@ export function generateRandomBlueTriangleGoalStructureCase(level: Level) {
     } else {
       return new BlueTriangleGoalWithColumnsCase(
         generatePinsWithPreferredBottom(3, "blue"),
-        generatePinsWithPreferredBottom(3, "blue"),
-        generatePinsWithPreferredBottom(3, "blue")
+        [],
+        []
       );
     }
   } else {
     return new BlueTriangleGoalWithColumnsCase(
       generatePinsWithPreferredBottom(3, "blue"),
-      generatePinsWithPreferredBottom(3, "blue"),
-      generatePinsWithPreferredBottom(3, "blue")
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "blue") : [],
+      Math.random() < 0.5 ? generatePinsWithPreferredBottom(3, "blue") : []
     );
   }
 }

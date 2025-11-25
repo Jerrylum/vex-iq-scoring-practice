@@ -35,16 +35,16 @@ export class StartingPinCase {
 
   public getElements(): Element[] {
     const rtn: Element[] = [];
-    if (this.isRedTopDetached) {
+    if (!this.isRedTopDetached) {
       rtn.push(this.redTopPin);
     }
-    if (this.isRedBottomDetached) {
+    if (!this.isRedBottomDetached) {
       rtn.push(this.redBottomPin);
     }
-    if (this.isBlueTopDetached) {
+    if (!this.isBlueTopDetached) {
       rtn.push(this.blueTopPin);
     }
-    if (this.isBlueBottomDetached) {
+    if (!this.isBlueBottomDetached) {
       rtn.push(this.blueBottomPin);
     }
     return rtn;

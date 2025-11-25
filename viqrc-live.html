@@ -72,10 +72,45 @@
             cursor: not-allowed;
             transform: none;
         }
+        
+        #difficulty-selector {
+            position: absolute;
+            top: 20px;
+            right: 180px;
+            z-index: 100;
+        }
+        
+        #difficulty-selector select {
+            padding: 12px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+        
+        #difficulty-selector select:hover {
+            background-color: #1976D2;
+        }
+        
+        #difficulty-selector select:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
     <div id="container">
+        <div id="difficulty-selector">
+            <select id="difficulty-select">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard" selected>Hard</option>
+            </select>
+        </div>
         <button id="reload-button">New Scenario</button>
         <div id="loading">Loading scene...</div>
     </div>
