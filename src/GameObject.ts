@@ -30,15 +30,8 @@ export abstract class GameObject {
   public getRotation(): THREE.Euler {
     return this.container.rotation.clone();
   }
-}
 
-export class PinObject extends GameObject {
-  constructor(model: THREE.Group, color: string, instanceId: number) {
-    super(model, `${color}Pin_${instanceId}`);
-    this.prepareModel();
-  }
-
-  private prepareModel(): void {
+  protected prepareModel(): void {
     // Rotate the model to correct orientation
     this.model.rotation.x = -Math.PI / 2;
 
@@ -54,16 +47,36 @@ export class PinObject extends GameObject {
   }
 }
 
+export class PinObject extends GameObject {
+  constructor(model: THREE.Group, color: string, instanceId: number) {
+    super(model, `${color}Pin_${instanceId}`);
+    this.prepareModel();
+  }
+}
+
 export class BeamObject extends GameObject {
   constructor(model: THREE.Group, instanceId: number) {
     super(model, `Beam_${instanceId}`);
     this.prepareModel();
   }
+}
 
-  private prepareModel(): void {
-    // Rotate the model to correct orientation
-    this.model.rotation.x = -Math.PI / 2;
+export class FloorObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `Floor_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
 
+  protected override prepareModel(): void {}
+}
+
+export class WallObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `Wall_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+
+  protected override prepareModel(): void {
     // Calculate bounding box after rotation
     const box = new THREE.Box3().setFromObject(this.model);
     const rotatedCenter = new THREE.Vector3();
@@ -81,16 +94,4 @@ export class Field extends GameObject {
     super(model, "Field");
     this.prepareModel();
   }
-
-  private prepareModel(): void {
-    // Field doesn't need rotation, just center it
-    const box = new THREE.Box3().setFromObject(this.model);
-    const center = new THREE.Vector3();
-    box.getCenter(center);
-
-    this.model.position.x = -center.x;
-    this.model.position.y = -center.y;
-    this.model.position.z = -center.z;
-  }
 }
-
