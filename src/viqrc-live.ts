@@ -26,6 +26,7 @@ import {
 import { RedSquareGoal } from "./structure/RedSquareGoal.js";
 import { RedTriangleGoalWithColumnsCase, RedTriangleGoal } from "./structure/RedTriangleGoal.js";
 import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
+import { StartingPinCase, StartingPinStructure } from "./structure/StartingPinStructure.js";
 
 let currentScene: Scene | null = null;
 
@@ -95,6 +96,11 @@ async function generateNewScenario(scene: Scene) {
   const s6 = new BlueTriangleGoal(c6, Math.floor(Math.random() * 1000000000));
   resources.use(s6);
   await s6.visualize(scene);
+
+  const c7 = new StartingPinCase(false, false, false, false);
+  const s7 = new StartingPinStructure(c7);
+  resources.use(s7);
+  await s7.visualize(scene);
 
   console.log("All game objects added successfully");
 }
