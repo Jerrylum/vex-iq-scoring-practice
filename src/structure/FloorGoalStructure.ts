@@ -136,8 +136,8 @@ export class FloorGoalWithColumnsCase extends FloorGoalCase {
 
     let y = -114;
     let a = this.isTopLeftColumnWithinArea() ? -2 : 1;
-    let b = random() * 5 * a;
-    let c = random() * 5 * a;
+    let b = random() * 10 * a;
+    let c = random() * 10 * a;
 
     for (const pin of this.topLeftColumn) {
       await scene.addPin(
@@ -150,8 +150,8 @@ export class FloorGoalWithColumnsCase extends FloorGoalCase {
 
     y = -114;
     a = this.isTopRightColumnWithinArea() ? -2 : 1;
-    b = random() * 5 * a;
-    c = random() * 5 * a;
+    b = random() * 10 * a;
+    c = random() * 10 * a;
 
     for (const pin of this.topRightColumn) {
       await scene.addPin(
@@ -164,8 +164,8 @@ export class FloorGoalWithColumnsCase extends FloorGoalCase {
 
     y = -114;
     a = this.isBottomLeftColumnWithinArea() ? -2 : 1;
-    b = random() * 5 * a;
-    c = random() * 5 * a;
+    b = random() * 10 * a;
+    c = random() * 10 * a;
 
     for (const pin of this.bottomLeftColumn) {
       await scene.addPin(
@@ -178,8 +178,8 @@ export class FloorGoalWithColumnsCase extends FloorGoalCase {
 
     y = -114;
     a = this.isBottomRightColumnWithinArea() ? -2 : 1;
-    b = random() * 5 * a;
-    c = random() * 5 * a;
+    b = random() * 10 * a;
+    c = random() * 10 * a;
 
     for (const pin of this.bottomRightColumn) {
       await scene.addPin(
