@@ -1,26 +1,33 @@
 import * as THREE from "three";
 import { Scene } from "./Scene.js";
-import {
-  BluePin,
-  OrangePin,
-  RedPin,
-  Resources,
-} from "./Element.js";
+import { BluePin, OrangePin, RedPin, Resources } from "./Element.js";
 import {
   StandoffGoalBeamPlacedCase,
   StandoffGoalOneColumnCase,
-  StandoffGoalOnlyBeamPlacedCase
+  StandoffGoalOnlyBeamPlacedCase,
 } from "./structure/StandoffGoalStructure.js";
 import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
-import { generateRandomBlueSquareGoalStructureCase, generateRandomFloorGoalStructureCase, generateRandomRedSquareGoalStructureCase, generateRandomStandoffGoalStructureCase } from "./Generator.js";
-import { FloorGoalStructure, FloorGoalWithColumnsCase } from "./structure/FloorGoalStructure.js";
-import { BlueSquareGoal, BlueSquareGoalWithOneColumnCase } from "./structure/BlueSquareGoal.js";
+import {
+  generateRandomBlueSquareGoalStructureCase,
+  generateRandomFloorGoalStructureCase,
+  generateRandomRedSquareGoalStructureCase,
+  generateRandomRedTriangleGoalStructureCase,
+  generateRandomStandoffGoalStructureCase,
+} from "./Generator.js";
+import {
+  FloorGoalStructure,
+  FloorGoalWithColumnsCase,
+} from "./structure/FloorGoalStructure.js";
+import {
+  BlueSquareGoal,
+  BlueSquareGoalWithOneColumnCase,
+} from "./structure/BlueSquareGoal.js";
 import { RedSquareGoal } from "./structure/RedSquareGoal.js";
+import { RedTriangleGoalWithColumnsCase, RedTriangleGoal } from "./structure/RedTriangleGoal.js";
 
 let currentScene: Scene | null = null;
 
 async function generateNewScenario(scene: Scene) {
-
   // Add game objects to the scene
   // Add two red pins
   // await scene.addPin(
@@ -54,7 +61,6 @@ async function generateNewScenario(scene: Scene) {
   //   new THREE.Euler(0, 0, 0)
   // );
 
-
   const resources = new Resources();
 
   const c = generateRandomStandoffGoalStructureCase("hard");
@@ -78,6 +84,10 @@ async function generateNewScenario(scene: Scene) {
   resources.use(s4);
   await s4.visualize(scene);
 
+  const c5 = generateRandomRedTriangleGoalStructureCase("hard");
+  const s5 = new RedTriangleGoal(c5, Math.floor(Math.random() * 1000000000));
+  resources.use(s5);
+  await s5.visualize(scene);
 
   console.log("All game objects added successfully");
 }
@@ -85,7 +95,9 @@ async function generateNewScenario(scene: Scene) {
 async function reloadScenario() {
   if (!currentScene) return;
 
-  const reloadButton = document.getElementById("reload-button") as HTMLButtonElement;
+  const reloadButton = document.getElementById(
+    "reload-button"
+  ) as HTMLButtonElement;
   if (reloadButton) {
     reloadButton.disabled = true;
     reloadButton.textContent = "Loading...";
