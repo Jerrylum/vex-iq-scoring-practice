@@ -32,9 +32,6 @@ export abstract class GameObject {
   }
 
   protected prepareModel(): void {
-    // Rotate the model to correct orientation
-    this.model.rotation.x = -Math.PI / 2;
-
     // Calculate bounding box after rotation
     const box = new THREE.Box3().setFromObject(this.model);
     const rotatedCenter = new THREE.Vector3();
@@ -52,12 +49,26 @@ export class PinObject extends GameObject {
     super(model, `${color}Pin_${instanceId}`);
     this.prepareModel();
   }
+
+  protected override prepareModel(): void {
+    // Rotate the model to correct orientation
+    this.model.rotation.x = -Math.PI / 2;
+
+    super.prepareModel();
+  }
 }
 
 export class BeamObject extends GameObject {
   constructor(model: THREE.Group, instanceId: number) {
     super(model, `Beam_${instanceId}`);
     this.prepareModel();
+  }
+
+  protected override prepareModel(): void {
+    // Rotate the model to correct orientation
+    this.model.rotation.x = -Math.PI / 2;
+
+    super.prepareModel();
   }
 }
 
@@ -75,17 +86,69 @@ export class WallObject extends GameObject {
     super(model, `Wall_${Math.random().toString(36).substring(2, 15)}`);
     this.prepareModel();
   }
+}
+
+export class CornerObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `Corner_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+}
+
+export class FloorGoalSheetObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `FloorGoalSheet_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+}
+
+export class StandoffGoalObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `StandoffGoal_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+}
+
+export class LoadZoneObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `LoadZone_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
 
   protected override prepareModel(): void {
-    // Calculate bounding box after rotation
-    const box = new THREE.Box3().setFromObject(this.model);
-    const rotatedCenter = new THREE.Vector3();
-    box.getCenter(rotatedCenter);
+    // Rotate the model to correct orientation
+    this.model.rotation.x = -Math.PI / 2;
 
-    // Center horizontally and place bottom on ground
-    this.model.position.x = -rotatedCenter.x;
-    this.model.position.y = -box.min.y;
-    this.model.position.z = -rotatedCenter.z;
+    super.prepareModel();
+  }
+}
+
+export class StartingPinSupportObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `StartingPinSupport_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+
+  protected override prepareModel(): void {
+    // Rotate the model to correct orientation
+    this.model.rotation.x = -Math.PI;
+
+    super.prepareModel();
+  }
+}
+
+export class TriangleGoalObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `TriangleGoal_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
+  }
+}
+
+
+export class SquareGoalObject extends GameObject {
+  constructor(model: THREE.Group) {
+    super(model, `SquareGoal_${Math.random().toString(36).substring(2, 15)}`);
+    this.prepareModel();
   }
 }
 
