@@ -5,6 +5,10 @@ import {
   BlueSquareGoalWithOneColumnCase,
 } from "./structure/BlueSquareGoal";
 import {
+  BlueTriangleGoalEmptyCase,
+  BlueTriangleGoalWithColumnsCase,
+} from "./structure/BlueTriangleGoal";
+import {
   FloorGoalEmptyCase,
   FloorGoalWithColumnsCase,
 } from "./structure/FloorGoalStructure";
@@ -187,6 +191,29 @@ export function generateRandomRedTriangleGoalStructureCase(level: Level) {
       generatePinsWithPreferredBottom(3, "red"),
       generatePinsWithPreferredBottom(3, "red"),
       generatePinsWithPreferredBottom(3, "red")
+    );
+  }
+}
+
+export function generateRandomBlueTriangleGoalStructureCase(level: Level) {
+  // for easy: empty case 20% or columns case 80%
+  // otherwise: columns case 100%
+  const caseType = Math.random();
+  if (level === "easy") {
+    if (caseType < 0.2) {
+      return new BlueTriangleGoalEmptyCase();
+    } else {
+      return new BlueTriangleGoalWithColumnsCase(
+        generatePinsWithPreferredBottom(3, "blue"),
+        generatePinsWithPreferredBottom(3, "blue"),
+        generatePinsWithPreferredBottom(3, "blue")
+      );
+    }
+  } else {
+    return new BlueTriangleGoalWithColumnsCase(
+      generatePinsWithPreferredBottom(3, "blue"),
+      generatePinsWithPreferredBottom(3, "blue"),
+      generatePinsWithPreferredBottom(3, "blue")
     );
   }
 }

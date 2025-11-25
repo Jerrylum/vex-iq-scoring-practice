@@ -9,6 +9,7 @@ import {
 import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
 import {
   generateRandomBlueSquareGoalStructureCase,
+  generateRandomBlueTriangleGoalStructureCase,
   generateRandomFloorGoalStructureCase,
   generateRandomRedSquareGoalStructureCase,
   generateRandomRedTriangleGoalStructureCase,
@@ -24,6 +25,7 @@ import {
 } from "./structure/BlueSquareGoal.js";
 import { RedSquareGoal } from "./structure/RedSquareGoal.js";
 import { RedTriangleGoalWithColumnsCase, RedTriangleGoal } from "./structure/RedTriangleGoal.js";
+import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
 
 let currentScene: Scene | null = null;
 
@@ -88,6 +90,11 @@ async function generateNewScenario(scene: Scene) {
   const s5 = new RedTriangleGoal(c5, Math.floor(Math.random() * 1000000000));
   resources.use(s5);
   await s5.visualize(scene);
+
+  const c6 = generateRandomBlueTriangleGoalStructureCase("hard");
+  const s6 = new BlueTriangleGoal(c6, Math.floor(Math.random() * 1000000000));
+  resources.use(s6);
+  await s6.visualize(scene);
 
   console.log("All game objects added successfully");
 }
