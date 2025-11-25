@@ -27,24 +27,24 @@ export class StartingPinCase {
   private readonly blueBottomPin: Pin = new BluePin();
 
   constructor(
-    private isRedTopDetached: boolean,
-    private isRedBottomDetached: boolean,
-    private isBlueTopDetached: boolean,
-    private isBlueBottomDetached: boolean
+    private isRedTopCleared: boolean,
+    private isRedBottomCleared: boolean,
+    private isBlueTopCleared: boolean,
+    private isBlueBottomCleared: boolean
   ) {}
 
   public getElements(): Element[] {
     const rtn: Element[] = [];
-    if (!this.isRedTopDetached) {
+    if (!this.isRedTopCleared) {
       rtn.push(this.redTopPin);
     }
-    if (!this.isRedBottomDetached) {
+    if (!this.isRedBottomCleared) {
       rtn.push(this.redBottomPin);
     }
-    if (!this.isBlueTopDetached) {
+    if (!this.isBlueTopCleared) {
       rtn.push(this.blueTopPin);
     }
-    if (!this.isBlueBottomDetached) {
+    if (!this.isBlueBottomCleared) {
       rtn.push(this.blueBottomPin);
     }
     return rtn;
@@ -56,7 +56,7 @@ export class StartingPinCase {
   ): Promise<void> {
     // return Promise.resolve();
 
-    if (!this.isRedTopDetached) {
+    if (!this.isRedTopCleared) {
       await scene.addPin(
         this.redTopPin.color,
         new THREE.Vector3(-3 * 12 * 25.4, 0, 1.5 * 12 * 25.4),
@@ -64,7 +64,7 @@ export class StartingPinCase {
       );
     }
 
-    if (!this.isBlueTopDetached) {
+    if (!this.isBlueTopCleared) {
       await scene.addPin(
         this.blueTopPin.color,
         new THREE.Vector3(-3 * 12 * 25.4, 0, -1.5 * 12 * 25.4),
@@ -72,7 +72,7 @@ export class StartingPinCase {
       );
     }
 
-    if (!this.isRedBottomDetached) {
+    if (!this.isRedBottomCleared) {
       await scene.addPin(
         this.redBottomPin.color,
         new THREE.Vector3(3 * 12 * 25.4, 0, -0.5 * 12 * 25.4),
@@ -80,7 +80,7 @@ export class StartingPinCase {
       );
     }
 
-    if (!this.isBlueBottomDetached) {
+    if (!this.isBlueBottomCleared) {
       await scene.addPin(
         this.blueBottomPin.color,
         new THREE.Vector3(3 * 12 * 25.4, 0, 0.5 * 12 * 25.4),
