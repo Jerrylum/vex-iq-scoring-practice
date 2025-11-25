@@ -9,6 +9,10 @@ import {
   FloorGoalWithColumnsCase,
 } from "./structure/FloorGoalStructure";
 import {
+  RedSquareGoalEmptyCase,
+  RedSquareGoalWithOneColumnCase,
+} from "./structure/RedSquareGoal";
+import {
   StandoffGoalBeamPlacedCase,
   StandoffGoalEmptyCase,
   StandoffGoalOneColumnCase,
@@ -139,6 +143,23 @@ export function generateRandomBlueSquareGoalStructureCase(level: Level) {
   } else {
     return new BlueSquareGoalWithOneColumnCase(
       generatePinsWithPreferredBottom(3, "blue")
+    );
+  }
+}
+
+export function generateRandomRedSquareGoalStructureCase(level: Level) {
+  // for easy: empty case 20% or one column case 80%
+  // otherwise: one column case 100%
+  const caseType = Math.random();
+  if (level === "easy") {
+    if (caseType < 0.2) {
+      return new RedSquareGoalEmptyCase();
+    } else {
+      return new RedSquareGoalWithOneColumnCase(generatePins(1, 3));
+    }
+  } else {
+    return new RedSquareGoalWithOneColumnCase(
+      generatePinsWithPreferredBottom(3, "red")
     );
   }
 }

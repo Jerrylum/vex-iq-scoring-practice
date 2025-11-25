@@ -12,9 +12,10 @@ import {
   StandoffGoalOnlyBeamPlacedCase
 } from "./structure/StandoffGoalStructure.js";
 import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
-import { generateRandomBlueSquareGoalStructureCase, generateRandomFloorGoalStructureCase, generateRandomStandoffGoalStructureCase } from "./Generator.js";
+import { generateRandomBlueSquareGoalStructureCase, generateRandomFloorGoalStructureCase, generateRandomRedSquareGoalStructureCase, generateRandomStandoffGoalStructureCase } from "./Generator.js";
 import { FloorGoalStructure, FloorGoalWithColumnsCase } from "./structure/FloorGoalStructure.js";
 import { BlueSquareGoal, BlueSquareGoalWithOneColumnCase } from "./structure/BlueSquareGoal.js";
+import { RedSquareGoal } from "./structure/RedSquareGoal.js";
 
 let currentScene: Scene | null = null;
 
@@ -71,6 +72,11 @@ async function generateNewScenario(scene: Scene) {
   const s3 = new BlueSquareGoal(c3, Math.floor(Math.random() * 1000000000));
   resources.use(s3);
   await s3.visualize(scene);
+
+  const c4 = generateRandomRedSquareGoalStructureCase("hard");
+  const s4 = new RedSquareGoal(c4, Math.floor(Math.random() * 1000000000));
+  resources.use(s4);
+  await s4.visualize(scene);
 
 
   console.log("All game objects added successfully");
