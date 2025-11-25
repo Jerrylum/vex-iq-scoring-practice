@@ -1,4 +1,5 @@
 import type { PinColor, Scene } from "./Scene";
+import type { StructureScoring } from "./Scoring";
 
 export abstract class Element {
   public robot1Contacted = false;
@@ -40,7 +41,7 @@ export class Beam extends Element {
 
 export abstract class Structure {
   public abstract getElements(): Element[];
-
+  public abstract getScoring(): StructureScoring;
   public abstract visualize(scene: Scene): Promise<void>;
 }
 
