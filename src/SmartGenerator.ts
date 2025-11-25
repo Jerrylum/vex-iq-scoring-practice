@@ -17,6 +17,10 @@ import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
 import { StartingPinStructure } from "./structure/StartingPinStructure.js";
 import { StacksOnFloorStructure } from "./structure/StacksOnFloorStructure.js";
 import {
+  RemainingPinsStructure,
+  generateRemainingPinsCase,
+} from "./structure/RemainingPinsStructure.js";
+import {
   generateRandomBeamOnFloorStructureCase,
   generateRandomBlueSquareGoalStructureCase,
   generateRandomBlueTriangleGoalStructureCase,
@@ -441,7 +445,7 @@ export class SmartScenarioGenerator {
       }
     }
 
-    // 9. Generate Starting Pin (lowest priority)
+    // 9. Generate Starting Pin
     const startingPin = this.generateStartingPin();
     if (startingPin) {
       structures.push(startingPin);
@@ -450,9 +454,31 @@ export class SmartScenarioGenerator {
       console.warn("Failed to generate StartingPin");
     }
 
+    // 10. Generate Remaining Pins (last - displays all unused orange pins)
     const available = this.tracker.getAvailable();
-    console.log("Resources remaining:", available);
-    console.log(`Total structures generated: ${structures.length}/9`);
+    if (available.orange > 0) {
+      try {
+        const caseData = generateRemainingPinsCase(available.orange);
+        const structure = new RemainingPinsStructure(caseData);
+        const elements = structure.getElements();
+        const pins = elements.filter((e) => e instanceof Pin) as Pin[];
+
+        // Use the remaining orange pins
+        this.tracker.use(pins);
+        structures.push(structure);
+        console.log(
+          `Generated: RemainingPins (${available.orange} orange pins)`
+        );
+      } catch (e) {
+        console.warn("Failed to generate RemainingPins:", e);
+      }
+    } else {
+      console.log("RemainingPins: No orange pins left");
+    }
+
+    const finalAvailable = this.tracker.getAvailable();
+    console.log("Resources remaining:", finalAvailable);
+    console.log(`Total structures generated: ${structures.length}/10`);
 
     return structures;
   }
