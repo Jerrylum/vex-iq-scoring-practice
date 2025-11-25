@@ -1,6 +1,10 @@
 import { BluePin, OrangePin, RedPin, type Pin } from "./Element";
 import type { PinColor } from "./Scene";
 import {
+  BlueSquareGoalEmptyCase,
+  BlueSquareGoalWithOneColumnCase,
+} from "./structure/BlueSquareGoal";
+import {
   FloorGoalEmptyCase,
   FloorGoalWithColumnsCase,
 } from "./structure/FloorGoalStructure";
@@ -39,7 +43,7 @@ export function generatePinsWithPreferredBottom(
   maxCount: number,
   preferredBottomColor: PinColor
 ) {
-  const count = Math.floor(Math.random() * (maxCount - 1)) + 1;
+  const count = Math.floor(Math.random() * maxCount) + 1;
   const pins = [];
   if (preferredBottomColor === "red") {
     pins.push(new RedPin());
@@ -118,6 +122,23 @@ export function generateRandomFloorGoalStructureCase(level: Level) {
       Math.random() < 0.8,
       generatePinsWithPreferredBottom(3, "orange"),
       Math.random() < 0.8
+    );
+  }
+}
+
+export function generateRandomBlueSquareGoalStructureCase(level: Level) {
+  // for easy: empty case 20% or one column case 80%
+  // otherwise: one column case 100%
+  const caseType = Math.random();
+  if (level === "easy") {
+    if (caseType < 0.2) {
+      return new BlueSquareGoalEmptyCase();
+    } else {
+      return new BlueSquareGoalWithOneColumnCase(generatePins(1, 3));
+    }
+  } else {
+    return new BlueSquareGoalWithOneColumnCase(
+      generatePinsWithPreferredBottom(3, "blue")
     );
   }
 }
