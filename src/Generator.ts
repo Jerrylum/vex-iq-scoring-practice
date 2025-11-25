@@ -25,6 +25,7 @@ import {
   StandoffGoalEmptyCase,
   StandoffGoalOneColumnCase,
 } from "./structure/StandoffGoalStructure";
+import { StartingPinCase } from "./structure/StartingPinStructure";
 
 export type Level = "easy" | "medium" | "hard";
 
@@ -216,4 +217,21 @@ export function generateRandomBlueTriangleGoalStructureCase(level: Level) {
       generatePinsWithPreferredBottom(3, "blue")
     );
   }
+}
+
+export function generateRandomStartingPinStructureCase(level: Level) {
+  // for easy: untouched case 20% or touched case 80%
+  // otherwise: one column case 100%
+  const caseType = Math.random();
+  if (level === "easy") {
+    if (caseType < 0.8) {
+      return new StartingPinCase(false, false, false, false);
+    }
+  }
+  return new StartingPinCase(
+    Math.random() < 0.5,
+    Math.random() < 0.5,
+    Math.random() < 0.5,
+    Math.random() < 0.5
+  );
 }

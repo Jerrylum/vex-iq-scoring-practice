@@ -1,11 +1,5 @@
-import * as THREE from "three";
 import { Scene } from "./Scene.js";
-import { BluePin, OrangePin, RedPin, Resources } from "./Element.js";
-import {
-  StandoffGoalBeamPlacedCase,
-  StandoffGoalOneColumnCase,
-  StandoffGoalOnlyBeamPlacedCase,
-} from "./structure/StandoffGoalStructure.js";
+import { Resources } from "./Element.js";
 import { StandoffGoalStructure } from "./structure/StandoffGoalStructure.js";
 import {
   generateRandomBlueSquareGoalStructureCase,
@@ -14,17 +8,16 @@ import {
   generateRandomRedSquareGoalStructureCase,
   generateRandomRedTriangleGoalStructureCase,
   generateRandomStandoffGoalStructureCase,
+  generateRandomStartingPinStructureCase,
 } from "./Generator.js";
 import {
   FloorGoalStructure,
-  FloorGoalWithColumnsCase,
 } from "./structure/FloorGoalStructure.js";
 import {
   BlueSquareGoal,
-  BlueSquareGoalWithOneColumnCase,
 } from "./structure/BlueSquareGoal.js";
 import { RedSquareGoal } from "./structure/RedSquareGoal.js";
-import { RedTriangleGoalWithColumnsCase, RedTriangleGoal } from "./structure/RedTriangleGoal.js";
+import { RedTriangleGoal } from "./structure/RedTriangleGoal.js";
 import { BlueTriangleGoal } from "./structure/BlueTriangleGoal.js";
 import { StartingPinCase, StartingPinStructure } from "./structure/StartingPinStructure.js";
 
@@ -97,7 +90,7 @@ async function generateNewScenario(scene: Scene) {
   resources.use(s6);
   await s6.visualize(scene);
 
-  const c7 = new StartingPinCase(false, false, false, false);
+  const c7 = generateRandomStartingPinStructureCase("hard");
   const s7 = new StartingPinStructure(c7);
   resources.use(s7);
   await s7.visualize(scene);

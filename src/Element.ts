@@ -50,6 +50,12 @@ export class Resources {
   public readonly orangePinsMaxCount = 16;
   public readonly beamsMaxCount = 2;
 
+  private structures: Structure[] = [];
+  private redPinsUsed = 0;
+  private bluePinsUsed = 0;
+  private orangePinsUsed = 0;
+  private beamsUsed = 0;
+
   public use(structure: Structure): void {
     const elements = structure.getElements();
     let redPinsCount = 0;
@@ -88,5 +94,30 @@ export class Resources {
     ) {
       throw new Error("Elements count does not match");
     }
+    this.redPinsUsed += redPinsCount;
+    this.bluePinsUsed += bluePinsCount;
+    this.orangePinsUsed += orangePinsCount;
+    this.beamsUsed += beamsCount;
+    this.structures.push(structure);
+  }
+
+  public getRedPinsUsed(): number {
+    return this.redPinsUsed;
+  }
+
+  public getBluePinsUsed(): number {
+    return this.bluePinsUsed;
+  }
+
+  public getOrangePinsUsed(): number {
+    return this.orangePinsUsed;
+  }
+
+  public getBeamsUsed(): number {
+    return this.beamsUsed;
+  }
+
+  public getStructures(): Structure[] {
+    return this.structures;
   }
 }
