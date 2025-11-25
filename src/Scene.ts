@@ -73,17 +73,17 @@ export class Scene {
     await Promise.all([
       this.modelLoader.loadModel(
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_RedPin.mtl",
+        "/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl",
         "RedPin"
       ),
       this.modelLoader.loadModel(
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_BluePin.mtl",
+        "/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl",
         "BluePin"
       ),
       this.modelLoader.loadModel(
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OrangePin.mtl",
+        "/static/VIQRC-MixAndMatch-H2H-_-ColorOrange.mtl",
         "OrangePin"
       ),
       this.modelLoader.loadModel(
@@ -108,9 +108,15 @@ export class Scene {
       orange: "OrangePin",
     };
 
+    const colorName = {
+      red: "Red",
+      blue: "Blue",
+      orange: "Orange",
+    };
+
     const modelName = colorMap[color];
     const objPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj`;
-    const mtlPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_${modelName}.mtl`;
+    const mtlPath = `/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`;
 
     // Load model (will use cache if already loaded)
     const model = await this.modelLoader.loadModel(objPath, mtlPath, modelName);
