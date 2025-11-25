@@ -37,6 +37,8 @@ export abstract class StandoffGoalCase {
 }
 
 export class StandoffGoalEmptyCase extends StandoffGoalCase {
+  private readonly beam: Beam = new Beam();
+
   public getBottomColumn(): Pin[] | null {
     return null;
   }
@@ -50,7 +52,7 @@ export class StandoffGoalEmptyCase extends StandoffGoalCase {
   }
 
   public getBeam(): Beam | null {
-    return null;
+    return this.beam;
   }
 
   public async visualize(
@@ -58,6 +60,12 @@ export class StandoffGoalEmptyCase extends StandoffGoalCase {
     structure: StandoffGoalStructure
   ): Promise<void> {
     // do nothing
+
+    // add beam on the floor
+    await scene.addBeam(
+      new THREE.Vector3(-300, -114, 0),
+      new THREE.Euler(0, (structure.rotation * Math.PI) / 180, 0)
+    );
   }
 }
 
@@ -93,6 +101,7 @@ export class StandoffGoalOnlyBeamPlacedCase extends StandoffGoalCase {
 
 export class StandoffGoalOneColumnCase extends StandoffGoalCase {
   private readonly column: Pin[];
+  private readonly beam: Beam = new Beam();
 
   constructor(column: Pin[]) {
     super();
@@ -115,7 +124,7 @@ export class StandoffGoalOneColumnCase extends StandoffGoalCase {
   }
 
   public getBeam(): Beam | null {
-    return null;
+    return this.beam;
   }
 
   public async visualize(
@@ -124,11 +133,17 @@ export class StandoffGoalOneColumnCase extends StandoffGoalCase {
   ): Promise<void> {
     let y = 74;
 
+    // add beam on the floor
+    await scene.addBeam(
+      new THREE.Vector3(-300, -114, 0),
+      new THREE.Euler(0, (structure.rotation * Math.PI) / 180, 0)
+    );
+
     for (const pin of this.column) {
       await scene.addPin(
         pin.color,
         new THREE.Vector3(0, y, 0),
-        new THREE.Euler(0, (structure.rotation * Math.PI) / 180, 0)
+        new THREE.Euler(0, 0, 0)
       );
       y += 60;
     }
