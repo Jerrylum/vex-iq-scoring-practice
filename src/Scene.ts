@@ -72,23 +72,23 @@ export class Scene {
     // Pre-load all pin models
     await Promise.all([
       this.modelLoader.loadModel(
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_RedPin.obj",
+        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_RedPin.mtl",
         "RedPin"
       ),
       this.modelLoader.loadModel(
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_BluePin.obj",
+        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_BluePin.mtl",
         "BluePin"
       ),
       this.modelLoader.loadModel(
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OrangePin.obj",
+        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj",
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_OrangePin.mtl",
         "OrangePin"
       ),
       this.modelLoader.loadModel(
         "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj",
-        "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.mtl",
+        "/static/VIQRC-MixAndMatch-H2H-_-Common.mtl",
         "Beam"
       ),
     ]);
@@ -109,7 +109,7 @@ export class Scene {
     };
 
     const modelName = colorMap[color];
-    const objPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_${modelName}.obj`;
+    const objPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj`;
     const mtlPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_${modelName}.mtl`;
 
     // Load model (will use cache if already loaded)
@@ -138,7 +138,7 @@ export class Scene {
     // Load beam model (will use cache if already loaded)
     const model = await this.modelLoader.loadModel(
       "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj",
-      "/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.mtl",
+      "/static/VIQRC-MixAndMatch-H2H-_-Common.mtl",
       "Beam"
     );
 
