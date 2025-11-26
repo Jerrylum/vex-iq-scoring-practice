@@ -9,6 +9,12 @@ export interface StructureScoring {
 	stacksPlacedOnStandoffGoal: number;
 }
 
+export interface ScenarioScoring {
+	structures: StructureScoring[];
+  startingPins: number;
+  contacted: number;
+}
+
 export function isNotTouching(e: Element): boolean {
 	return !e.robot1Contacted && !e.robot2Contacted;
 }

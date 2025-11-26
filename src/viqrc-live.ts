@@ -1,5 +1,5 @@
 import { Scene } from "./Scene.js";
-import { generateSmartScenario, type Difficulty } from "./SmartGenerator.js";
+import { generateScenario, type Difficulty } from "./SmartGenerator.js";
 
 let currentScene: Scene | null = null;
 let currentDifficulty: Difficulty = "hard";
@@ -8,10 +8,10 @@ async function generateNewScenario(scene: Scene) {
   console.log(`\n=== Generating new scenario (difficulty: ${currentDifficulty}) ===`);
   
   // Generate all structures with smart resource management
-  const structures = generateSmartScenario(currentDifficulty);
+  const scenario = generateScenario(currentDifficulty);
 
   // Visualize all structures
-  for (const structure of structures) {
+  for (const structure of scenario.structures) {
     try {
       await structure.visualize(scene);
     } catch (error) {
@@ -19,7 +19,7 @@ async function generateNewScenario(scene: Scene) {
     }
   }
 
-  console.log(`\n=== Scenario generation complete: ${structures.length} structures created ===\n`);
+  console.log(`\n=== Scenario generation complete: ${scenario.structures.length} structures created ===\n`);
 }
 
 async function reloadScenario() {
