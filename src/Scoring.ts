@@ -11,8 +11,8 @@ export interface StructureScoring {
 
 export interface ScenarioScoring {
 	structures: StructureScoring[];
-  startingPins: number;
-  contacted: number;
+	startingPins: number;
+	contacted: number;
 }
 
 export function isNotTouching(e: Element): boolean {

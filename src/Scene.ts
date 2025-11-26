@@ -14,7 +14,7 @@ import {
 	LoadZoneObject,
 	StartingPinSupportObject,
 	TriangleGoalObject,
-  SquareGoalObject
+	SquareGoalObject
 } from './GameObject.js';
 
 export type PinColor = 'red' | 'blue' | 'orange';
@@ -411,21 +411,21 @@ export class Scene {
 		return triangleGoal;
 	}
 
-  public async addSquareGoal(color: PinColor, position: THREE.Vector3, rotation: number) {
-    const model = await this.modelLoader.loadModel(
-      '/static/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
-      `/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
-      `SquareGoal ${colorName[color]}`
-    );
-    const squareGoal = new SquareGoalObject(model);
-    squareGoal.setPosition(position);
-    squareGoal.setRotation(new THREE.Euler(0, (rotation * Math.PI) / 180, 0));
+	public async addSquareGoal(color: PinColor, position: THREE.Vector3, rotation: number) {
+		const model = await this.modelLoader.loadModel(
+			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
+			`/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
+			`SquareGoal ${colorName[color]}`
+		);
+		const squareGoal = new SquareGoalObject(model);
+		squareGoal.setPosition(position);
+		squareGoal.setRotation(new THREE.Euler(0, (rotation * Math.PI) / 180, 0));
 
-    this.renderer.scene.add(squareGoal.getObject());
-    this.fieldObjects.push(squareGoal);
-    console.log('Added square goal at', position);
-    return squareGoal;
-  }
+		this.renderer.scene.add(squareGoal.getObject());
+		this.fieldObjects.push(squareGoal);
+		console.log('Added square goal at', position);
+		return squareGoal;
+	}
 
 	public removeGameObject(gameObject: GameObject): void {
 		this.renderer.scene.remove(gameObject.getObject());

@@ -29,7 +29,7 @@ export class BlueTriangleGoal extends Structure {
 
 export abstract class BlueTriangleGoalCase {
 	public abstract getElements(): Element[];
-  public abstract getScoring(): StructureScoring;
+	public abstract getScoring(): StructureScoring;
 	public abstract visualize(scene: Scene, structure: BlueTriangleGoal): Promise<void>;
 }
 

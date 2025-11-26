@@ -153,7 +153,7 @@ export class BeamWithTwoBottomColumnsCase extends BeamOnFloorCase {
 	private readonly bottomColumn1: Pin[];
 	private readonly bottomColumn2: Pin[];
 	private readonly topColumn: Pin[];
-  private readonly beam: Beam = new Beam();
+	private readonly beam: Beam = new Beam();
 
 	constructor(bottomColumn1: Pin[], bottomColumn2: Pin[], topColumn: Pin[]) {
 		super();
