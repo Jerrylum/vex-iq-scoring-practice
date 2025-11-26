@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Beam, Pin } from '../Element';
+import { Structure, ScoringObject, Beam, Pin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import { isStack, isStackMatchingGoal, isThreeColorStack, isTwoColorStack, type StructureScoring } from '../Scoring';
 
@@ -13,7 +13,7 @@ export class StandoffGoalStructure extends Structure {
 		this.rotation = rotation;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [
 			...(this.theCase.getBottomColumn() ?? []),
 			...(this.theCase.getTopLeftColumn() ?? []),

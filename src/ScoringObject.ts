@@ -1,12 +1,12 @@
 import type { PinColor, Scene } from './Scene';
 import type { StructureScoring } from './Scoring';
 
-export abstract class Element {
+export abstract class ScoringObject {
 	public robot1Contacted = false;
 	public robot2Contacted = false;
 }
 
-export abstract class Pin extends Element {
+export abstract class Pin extends ScoringObject {
 	public readonly color: PinColor;
 
 	constructor(color: PinColor) {
@@ -33,14 +33,14 @@ export class OrangePin extends Pin {
 	}
 }
 
-export class Beam extends Element {
+export class Beam extends ScoringObject {
 	constructor() {
 		super();
 	}
 }
 
 export abstract class Structure {
-	public abstract getElements(): Element[];
+	public abstract getElements(): ScoringObject[];
 	public abstract getScoring(): StructureScoring;
 	public abstract visualize(scene: Scene): Promise<void>;
 }

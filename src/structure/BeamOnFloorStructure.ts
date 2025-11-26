@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Pin, Beam } from '../Element';
+import { Structure, ScoringObject, Pin, Beam } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import { mulberry32 } from '../utils';
 import { isStack, isThreeColorStack, isTwoColorStack, type StructureScoring } from '../Scoring';
@@ -14,7 +14,7 @@ export class BeamOnFloorStructure extends Structure {
 		this.randomSeed = randomSeed;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return this.theCase.getElements();
 	}
 
@@ -28,7 +28,7 @@ export class BeamOnFloorStructure extends Structure {
 }
 
 export abstract class BeamOnFloorCase {
-	public abstract getElements(): Element[];
+	public abstract getElements(): ScoringObject[];
 	public abstract getScoring(): StructureScoring;
 	public abstract visualize(scene: Scene, structure: BeamOnFloorStructure): Promise<void>;
 }
@@ -36,7 +36,7 @@ export abstract class BeamOnFloorCase {
 export class JustBeamOnFloorCase extends BeamOnFloorCase {
 	private readonly beam: Beam = new Beam();
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [this.beam];
 	}
 	public getScoring(): StructureScoring {
@@ -70,7 +70,7 @@ export class BeamWithColumnsCase extends BeamOnFloorCase {
 		this.topRightColumn = topRightColumn;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [...this.bottomColumn, ...this.topLeftColumn, ...this.topRightColumn, this.beam];
 	}
 
@@ -162,7 +162,7 @@ export class BeamWithTwoBottomColumnsCase extends BeamOnFloorCase {
 		this.topColumn = topColumn;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [...this.bottomColumn1, ...this.bottomColumn2, ...this.topColumn, this.beam];
 	}
 

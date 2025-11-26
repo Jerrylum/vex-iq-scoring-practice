@@ -1,4 +1,4 @@
-import { BluePin, OrangePin, RedPin, type Pin } from './Element';
+import { BluePin, OrangePin, RedPin, type Pin } from './ScoringObject';
 import type { PinColor } from './Scene';
 import { BeamWithColumnsCase, BeamWithTwoBottomColumnsCase, JustBeamOnFloorCase } from './structure/BeamOnFloorStructure';
 import { BlueSquareGoalEmptyCase, BlueSquareGoalWithOneColumnCase } from './structure/BlueSquareGoal';

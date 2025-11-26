@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Pin, OrangePin } from '../Element';
+import { Structure, ScoringObject, Pin, OrangePin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import type { StructureScoring } from '../Scoring';
 
@@ -11,7 +11,7 @@ export class RemainingPinsStructure extends Structure {
 		this.theCase = theCase;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return this.theCase.getElements();
 	}
 
@@ -27,7 +27,7 @@ export class RemainingPinsStructure extends Structure {
 export class RemainingPinsCase {
 	constructor(private readonly orangePins: OrangePin[]) {}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [...this.orangePins];
 	}
 

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Beam, Pin } from '../Element';
+import { Structure, ScoringObject, Beam, Pin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import { mulberry32 } from '../utils';
 import { isStack, isStackMatchingGoal, isThreeColorStack, isTwoColorStack, type StructureScoring } from '../Scoring';
@@ -14,7 +14,7 @@ export class FloorGoalStructure extends Structure {
 		this.randomSeed = randomSeed;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [
 			...(this.theCase.getTopLeftColumn() ?? []),
 			...(this.theCase.getTopRightColumn() ?? []),

@@ -1,4 +1,5 @@
-import type { Structure } from './Element';
+import type { ScenarioScoring } from './Scoring';
+import type { Structure } from './ScoringObject';
 import type { BeamOnFloorStructure } from './structure/BeamOnFloorStructure';
 import type { FloorGoalStructure } from './structure/FloorGoalStructure';
 import type { RemainingPinsStructure } from './structure/RemainingPinsStructure';
@@ -17,5 +18,13 @@ export class Scenario {
 
 	get structures(): Structure[] {
 		return [this.standoffGoal, this.beamOnFloor, this.floorGoal, ...this.otherStructures, this.startingPin, this.remainingPins];
+	}
+
+	calculateScoring(): ScenarioScoring {
+		return {
+			structures: this.structures.map((structure) => structure.getScoring()),
+			startingPins: this.startingPin.theCase.getElements().length,
+			contacted: 0 // Ignored for now
+		};
 	}
 }

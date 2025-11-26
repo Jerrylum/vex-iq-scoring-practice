@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Pin, BluePin, RedPin } from '../Element';
+import { Structure, ScoringObject, Pin, BluePin, RedPin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import type { StructureScoring } from '../Scoring';
 
@@ -11,7 +11,7 @@ export class StartingPinStructure extends Structure {
 		this.theCase = theCase;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return this.theCase.getElements();
 	}
 
@@ -37,8 +37,8 @@ export class StartingPinCase {
 		private isBlueBottomCleared: boolean
 	) {}
 
-	public getElements(): Element[] {
-		const rtn: Element[] = [];
+	public getElements(): ScoringObject[] {
+		const rtn: ScoringObject[] = [];
 		if (!this.isRedTopCleared) {
 			rtn.push(this.redTopPin);
 		}

@@ -1,4 +1,4 @@
-import { BluePin, OrangePin, RedPin, Resources, Structure, Pin } from './Element.js';
+import { BluePin, OrangePin, RedPin, Resources, Structure, Pin } from './ScoringObject.js';
 import type { PinColor } from './Scene.js';
 import { StandoffGoalStructure } from './structure/StandoffGoalStructure.js';
 import { BeamOnFloorStructure } from './structure/BeamOnFloorStructure.js';
@@ -296,7 +296,9 @@ export class ScenarioGenerator {
 
 	private generateStartingPin(): StartingPinStructure | null {
 		const availableColors = this.tracker.getAvailableColors();
-		if (availableColors.length === 0) return null;
+		if (availableColors.length === 0) {
+			return new StartingPinStructure(new StartingPinCase(false, false, false, false));
+		}
 
 		for (let attempt = 0; attempt < this.getMaxAttemptsForStructure(); attempt++) {
 			try {

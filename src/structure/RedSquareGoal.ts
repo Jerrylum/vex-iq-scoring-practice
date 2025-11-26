@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Pin } from '../Element';
+import { Structure, ScoringObject, Pin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import { isStack, isStackMatchingGoal, isThreeColorStack, isTwoColorStack, type StructureScoring } from '../Scoring';
 import { mulberry32 } from '../utils';
@@ -14,7 +14,7 @@ export class RedSquareGoal extends Structure {
 		this.randomSeed = randomSeed;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return this.theCase.getElements();
 	}
 
@@ -28,13 +28,13 @@ export class RedSquareGoal extends Structure {
 }
 
 export abstract class RedSquareGoalCase {
-	public abstract getElements(): Element[];
+	public abstract getElements(): ScoringObject[];
 	public abstract getScoring(): StructureScoring;
 	public abstract visualize(scene: Scene, structure: RedSquareGoal): Promise<void>;
 }
 
 export class RedSquareGoalEmptyCase extends RedSquareGoalCase {
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [];
 	}
 
@@ -65,7 +65,7 @@ export class RedSquareGoalWithOneColumnCase extends RedSquareGoalCase {
 		this.column = column;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return [...this.column];
 	}
 

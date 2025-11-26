@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Structure, Element, Pin } from '../Element';
+import { Structure, ScoringObject, Pin } from '../ScoringObject';
 import type { Scene } from '../Scene';
 import { isStack, isThreeColorStack, isTwoColorStack, type StructureScoring } from '../Scoring';
 
@@ -11,7 +11,7 @@ export class StacksOnFloorStructure extends Structure {
 		this.theCase = theCase;
 	}
 
-	public getElements(): Element[] {
+	public getElements(): ScoringObject[] {
 		return this.theCase.getElements();
 	}
 
@@ -27,8 +27,8 @@ export class StacksOnFloorStructure extends Structure {
 export class StacksOnFloorCase {
 	constructor(private readonly stacks: Pin[][]) {}
 
-	public getElements(): Element[] {
-		const elements: Element[] = [];
+	public getElements(): ScoringObject[] {
+		const elements: ScoringObject[] = [];
 		for (const stack of this.stacks) {
 			elements.push(...stack);
 		}

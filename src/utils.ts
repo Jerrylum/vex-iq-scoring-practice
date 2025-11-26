@@ -1,4 +1,4 @@
-import type { Pin } from './Element';
+import type { Pin } from './ScoringObject';
 
 export function mulberry32(seed: number) {
 	return function () {

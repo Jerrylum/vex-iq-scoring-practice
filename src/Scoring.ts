@@ -1,4 +1,4 @@
-import type { Beam, Element, Pin } from './Element';
+import type { Beam, ScoringObject, Pin } from './ScoringObject';
 
 export interface StructureScoring {
 	connectedPins: number;
@@ -15,7 +15,7 @@ export interface ScenarioScoring {
 	contacted: number;
 }
 
-export function isNotTouching(e: Element): boolean {
+export function isNotTouching(e: ScoringObject): boolean {
 	return !e.robot1Contacted && !e.robot2Contacted;
 }
 
