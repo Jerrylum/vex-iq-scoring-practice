@@ -2,6 +2,8 @@
 
 An interactive 3D web application for practicing VEX IQ Robotics Competition Mix & Match scoring. This project does not include edge cases, but could serve as a starting point for new scorekeeper referees and students to learn the scoring system of this season.
 
+**Available at:** [vex-iq-scoring.jerryio.com](https://vex-iq-scoring.jerryio.com)
+
 ## How to Play
 
 Select a difficulty level and click "New" to generate a random scenario. Examine the 3D field and count the scoring items using the panel on the right (connected pins, beams, stacks, etc.). Click "Check" to verify your answer and see the correct score.
@@ -89,4 +91,6 @@ This is a practice/educational project. Feel free to fork and modify for your ow
 
 ## License
 
-This project is for educational purposes. VEX IQ is a trademark of Innovation First International, Inc.
+This project is licensed under the GNU General Public License v3.0 (GPLv3). See the [LICENSE](LICENSE) file for details.
+
+VEX IQ is a trademark of Innovation First International, Inc. This project is for educational purposes.
