@@ -1,5 +1,5 @@
 {
-	"name": "threejstest2",
+	"name": "vex-iq-scoring-practice",
 	"module": "index.ts",
 	"type": "module",
 	"private": true,
