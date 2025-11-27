@@ -4,6 +4,8 @@ An interactive 3D web application for practicing VEX IQ Robotics Competition Mix
 
 **Available at:** [vex-iq-scoring.jerryio.com](https://vex-iq-scoring.jerryio.com)
 
+![VEX IQ Scoring Practice Screenshot](docs/web-app-screenshot.png)
+
 ## How to Play
 
 Select a difficulty level and click "New" to generate a random scenario. Examine the 3D field and count the scoring items using the panel on the right (connected pins, beams, stacks, etc.). Click "Check" to verify your answer and see the correct score.
