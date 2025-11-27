@@ -160,7 +160,7 @@
 	<title>VEX IQ Scoring Practice</title>
 </svelte:head>
 
-<div class="flex h-screen w-screen bg-[#1a1a1a]">
+<div class="flex h-screen w-screen bg-black">
 	<!-- Three.js container -->
 	<div class="relative h-full flex-1 overflow-hidden">
 		<div id="container" class="absolute top-0 left-0 h-full w-full"></div>
@@ -219,7 +219,7 @@
 				<div class="mt-3 flex gap-2">
 					<select
 						id="difficulty-select"
-						class="flex-1 cursor-pointer rounded-md border-none bg-blue-600 px-3 py-2 text-sm text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+						class="flex-1 cursor-pointer rounded-md border-none bg-[#0076BB] px-3 py-2 text-sm text-white transition-colors hover:bg-[#005a91] disabled:cursor-not-allowed disabled:bg-[#888B95]"
 						value={currentDifficulty}
 						onchange={handleDifficultyChange}
 						disabled={isReloading}
