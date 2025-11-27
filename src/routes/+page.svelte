@@ -36,6 +36,7 @@
 	let showAnswer = $state(false);
 	let actualTotalScore = $state(0);
 	let isPanelCollapsed = $state(false);
+	let showHowToPlayDialog = $state(false);
 
 	$effect(() => {
 		// Calculate actual total score from the scenario
@@ -75,6 +76,10 @@
 				currentScene.resize();
 			}
 		}, 350); // Slightly longer than the 300ms transition
+	}
+
+	function toggleHowToPlayDialog() {
+		showHowToPlayDialog = !showHowToPlayDialog;
 	}
 
 	async function generateNewScenario(scene: Scene) {
@@ -212,7 +217,16 @@
 			<div class="flex-none border-b border-[#374151] bg-[#111827] p-3">
 				<div class="flex items-center justify-between">
 					<h2 class="text-lg font-bold">Scoring Panel</h2>
-					<button class="rounded-md bg-[#888B95] px-2 py-1 text-xs hover:bg-[#6b6e76] md:hidden" onclick={togglePanel}> Close </button>
+					<div class="flex gap-2">
+						<button
+							class="rounded-md bg-[#0076BB] px-2 py-1 text-xs hover:bg-[#005a91]"
+							onclick={toggleHowToPlayDialog}
+							aria-label="How to Play"
+						>
+							?
+						</button>
+						<button class="rounded-md bg-[#888B95] px-2 py-1 text-xs hover:bg-[#6b6e76] md:hidden" onclick={togglePanel}> Close </button>
+					</div>
 				</div>
 
 				<!-- Difficulty and New Scenario Controls -->
@@ -319,4 +333,97 @@
 			</div>
 		{/if}
 	</div>
+
+	<!-- How to Play Dialog -->
+	{#if showHowToPlayDialog}
+		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+		<div
+			class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+			onclick={toggleHowToPlayDialog}
+			onkeydown={(e) => e.key === 'Escape' && toggleHowToPlayDialog()}
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="dialog-title"
+			tabindex="-1"
+		>
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div
+				class="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-[#1f2937] p-6 text-white shadow-2xl"
+				onclick={(e) => e.stopPropagation()}
+			>
+				<div class="mb-4 flex items-center justify-between">
+					<h2 id="dialog-title" class="text-2xl font-bold">How to Play</h2>
+					<button
+						class="flex h-8 w-8 items-center justify-center rounded-md bg-[#374151] text-xl hover:bg-[#4b5563]"
+						onclick={toggleHowToPlayDialog}
+						aria-label="Close dialog"
+					>
+						×
+					</button>
+				</div>
+
+				<div class="space-y-4 text-sm leading-relaxed">
+					<section>
+						<h3 class="mb-2 text-lg font-semibold text-[#0076BB]">Getting Started</h3>
+						<p>
+							Select a difficulty level (Easy, Medium, or Hard) and click the <strong>"New"</strong> button to generate a random field scenario.
+							Examine the 3D field and use the scoring panel to count the various scoring items.
+						</p>
+					</section>
+
+					<section>
+						<h3 class="mb-2 text-lg font-semibold text-[#0076BB]">Scoring Items</h3>
+						<ul class="ml-4 list-disc space-y-1">
+							<li><strong>Connected Pins:</strong> 1 pt each</li>
+							<li><strong>Connected Beams:</strong> 10 pts each</li>
+							<li><strong>2-Color Stacks:</strong> 5 pts each</li>
+							<li><strong>3-Color Stacks:</strong> 15 pts each</li>
+							<li><strong>Stacks in Matching Goal and/or Connected to Beam:</strong> 10 pts each</li>
+							<li><strong>Stacks Placed on Standoff Goal:</strong> 10 pts each</li>
+							<li><strong>Cleared Starting Pins:</strong> 2 pts each</li>
+							<li><strong>Robots Contacting 2+ Scoring Objects:</strong> 2 pts each</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3 class="mb-2 text-lg font-semibold text-[#0076BB]">Controls</h3>
+						<ul class="ml-4 list-disc space-y-1">
+							<li><strong>Left Click + Drag:</strong> Rotate camera</li>
+							<li><strong>Right Click + Drag:</strong> Pan camera</li>
+							<li><strong>Scroll Wheel:</strong> Zoom in/out</li>
+							<li><strong>Touch:</strong> Pinch to zoom, drag to rotate</li>
+						</ul>
+					</section>
+
+					<section>
+						<h3 class="mb-2 text-lg font-semibold text-[#0076BB]">Checking Your Score</h3>
+						<p>
+							After counting all the scoring items, click the <strong>"Check"</strong> button to see if your total matches the correct score.
+							The correct count for each item will be displayed, helping you learn what you might have missed.
+						</p>
+					</section>
+
+					<section class="border-t border-[#374151] pt-4">
+						<h3 class="mb-2 text-lg font-semibold text-[#0076BB]">About</h3>
+						<p class="mb-2">
+							This project is open source and available on GitHub:
+							<a
+								href="https://github.com/Jerrylum/vex-iq-scoring-practice"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="text-[#60a5fa] hover:underline"
+							>
+								Jerrylum/vex-iq-scoring-practice
+							</a>
+						</p>
+						<p class="text-xs text-[#888B95]">
+							This project is licensed under the GNU General Public License v3.0 (GPLv3). VEX IQ is a trademark of Innovation First
+							International, Inc.
+						</p>
+					</section>
+				</div>
+			</div>
+		</div>
+	{/if}
 </div>
