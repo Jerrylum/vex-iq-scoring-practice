@@ -23,7 +23,7 @@ export class Scenario {
 	calculateScoring(): ScenarioScoring {
 		return {
 			structures: this.structures.map((structure) => structure.getScoring()),
-			startingPins: this.startingPin.theCase.getElements().length,
+			startingPins: 4 - this.startingPin.getElements().length,
 			contacted: 0 // Ignored for now
 		};
 	}

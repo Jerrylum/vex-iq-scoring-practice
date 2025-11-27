@@ -85,9 +85,9 @@ export class BlueTriangleGoalWithColumnsCase extends BlueTriangleGoalCase {
 			threeColorStacks:
 				(isThreeColorStack(this.column1) ? 1 : 0) + (isThreeColorStack(this.column2) ? 1 : 0) + (isThreeColorStack(this.column3) ? 1 : 0),
 			matchingGoals:
-				(isStackMatchingGoal(this.column1) ? 1 : 0) +
-				(isStackMatchingGoal(this.column2) ? 1 : 0) +
-				(isStackMatchingGoal(this.column3) ? 1 : 0),
+				(isStackMatchingGoal(this.column1, 'blue') ? 1 : 0) +
+				(isStackMatchingGoal(this.column2, 'blue') ? 1 : 0) +
+				(isStackMatchingGoal(this.column3, 'blue') ? 1 : 0),
 			stacksPlacedOnStandoffGoal: 0
 		};
 	}

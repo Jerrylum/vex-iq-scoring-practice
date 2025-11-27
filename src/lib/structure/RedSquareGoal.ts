@@ -75,7 +75,7 @@ export class RedSquareGoalWithOneColumnCase extends RedSquareGoalCase {
 			connectedBeams: 0,
 			twoColorStacks: isTwoColorStack(this.column) ? 1 : 0,
 			threeColorStacks: isThreeColorStack(this.column) ? 1 : 0,
-			matchingGoals: isStackMatchingGoal(this.column) ? 1 : 0,
+			matchingGoals: isStackMatchingGoal(this.column, 'red') ? 1 : 0,
 			stacksPlacedOnStandoffGoal: 0
 		};
 	}

@@ -158,10 +158,10 @@ export class FloorGoalWithColumnsCase extends FloorGoalCase {
 				(isThreeColorStack(this.bottomLeftColumn) ? 1 : 0) +
 				(isThreeColorStack(this.bottomRightColumn) ? 1 : 0),
 			matchingGoals:
-				(isStackMatchingGoal(this.topLeftColumn) && this.isTopLeftColumnWithinArea() ? 1 : 0) +
-				(isStackMatchingGoal(this.topRightColumn) && this.isTopRightColumnWithinArea() ? 1 : 0) +
-				(isStackMatchingGoal(this.bottomLeftColumn) && this.isBottomLeftColumnWithinArea() ? 1 : 0) +
-				(isStackMatchingGoal(this.bottomRightColumn) && this.isBottomRightColumnWithinArea() ? 1 : 0),
+				(isStackMatchingGoal(this.topLeftColumn, 'orange') && this.isTopLeftColumnWithinArea() ? 1 : 0) +
+				(isStackMatchingGoal(this.topRightColumn, 'orange') && this.isTopRightColumnWithinArea() ? 1 : 0) +
+				(isStackMatchingGoal(this.bottomLeftColumn, 'orange') && this.isBottomLeftColumnWithinArea() ? 1 : 0) +
+				(isStackMatchingGoal(this.bottomRightColumn, 'orange') && this.isBottomRightColumnWithinArea() ? 1 : 0),
 			stacksPlacedOnStandoffGoal: 0
 		};
 	}

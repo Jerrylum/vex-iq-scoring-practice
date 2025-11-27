@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import { Renderer } from './Renderer.js';
-import { ModelLoader } from './ModelLoader.js';
+import { ModelLoader } from './ModelLoader';
 import {
 	PinObject,
 	BeamObject,
@@ -15,7 +14,8 @@ import {
 	StartingPinSupportObject,
 	TriangleGoalObject,
 	SquareGoalObject
-} from './GameObject.js';
+} from './GameObject';
+import { Renderer } from './Renderer';
 
 export type PinColor = 'red' | 'blue' | 'orange';
 
@@ -41,6 +41,11 @@ export class Scene {
 	constructor(containerId: string) {
 		this.renderer = new Renderer(containerId);
 		this.modelLoader = new ModelLoader();
+	}
+
+	public resize(): void {
+		// Trigger renderer resize when container dimensions change
+		this.renderer.resize();
 	}
 
 	public async initialize(): Promise<void> {

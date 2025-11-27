@@ -16,12 +16,14 @@ export class Renderer {
 		this.scene.background = new THREE.Color(0x2a2a2a);
 
 		// Initialize camera
-		this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+		const width = this.container.clientWidth;
+		const height = this.container.clientHeight;
+		this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000);
 		this.camera.position.set(100, 100, 100);
 
 		// Initialize renderer with standard settings
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.renderer.setSize(width, height);
 		this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 		this.container.appendChild(this.renderer.domElement);
@@ -76,9 +78,16 @@ export class Renderer {
 	}
 
 	private onWindowResize(): void {
-		this.camera.aspect = window.innerWidth / window.innerHeight;
+		const width = this.container.clientWidth;
+		const height = this.container.clientHeight;
+		this.camera.aspect = width / height;
 		this.camera.updateProjectionMatrix();
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		this.renderer.setSize(width, height);
+	}
+
+	public resize(): void {
+		// Public method to manually trigger resize (e.g., when panel is collapsed/expanded)
+		this.onWindowResize();
 	}
 
 	private animate(): void {
