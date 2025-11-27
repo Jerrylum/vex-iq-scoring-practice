@@ -143,36 +143,12 @@ export class Scene {
 	private async preloadGameObjects(): Promise<void> {
 		// Pre-load all pin models
 		await Promise.all([
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
-				'RedPin'
-			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
-				'BluePin'
-			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/VIQRC-MixAndMatch-H2H-_-ColorOrange.mtl',
-				'OrangePin'
-			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj',
-				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
-				'Beam'
-			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj',
-				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
-				'Corner'
-			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj',
-				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
-				'Floor'
-			),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj', '/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl', 'RedPin'),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj', '/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl', 'BluePin'),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj', '/VIQRC-MixAndMatch-H2H-_-ColorOrange.mtl', 'OrangePin'),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj', '/VIQRC-MixAndMatch-H2H-_-Common.mtl', 'Beam'),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj', '/VIQRC-MixAndMatch-H2H-_-Common.mtl', 'Corner'),
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj', '/VIQRC-MixAndMatch-H2H-_-Common.mtl', 'Floor'),
 			this.modelLoader.loadModel(
 				'/VIQRC-MixAndMatch-H2H-_-GameObjects_FloorGoalSheet.obj',
 				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
@@ -223,11 +199,7 @@ export class Scene {
 				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'TriangleGoal Blue'
 			),
-			this.modelLoader.loadModel(
-				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj',
-				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
-				'Wall'
-			)
+			this.modelLoader.loadModel('/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj', '/VIQRC-MixAndMatch-H2H-_-Common.mtl', 'Wall')
 		]);
 
 		console.log('All game object models preloaded');
