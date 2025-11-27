@@ -179,7 +179,7 @@
 		<!-- Mobile Panel Toggle Button (when collapsed) -->
 		{#if isPanelCollapsed}
 			<button
-				class="absolute right-4 bottom-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 md:hidden"
+				class="absolute right-4 bottom-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#0076BB] text-white shadow-lg hover:bg-[#005a91] md:hidden"
 				onclick={togglePanel}
 				aria-label="Open scoring panel"
 			>
@@ -192,7 +192,7 @@
 
 	<!-- Scoring Panel -->
 	<div
-		class="relative flex h-full flex-col bg-gray-900 text-white shadow-2xl transition-all duration-300 max-md:absolute max-md:top-0 max-md:right-0 max-md:z-40"
+		class="relative flex h-full flex-col bg-[#1f2937] text-white shadow-2xl transition-all duration-300 max-md:absolute max-md:top-0 max-md:right-0 max-md:z-40"
 		class:w-[400px]={!isPanelCollapsed}
 		class:w-12={isPanelCollapsed}
 		class:max-md:w-full={!isPanelCollapsed}
@@ -200,7 +200,7 @@
 	>
 		<!-- Collapse Button (Desktop) -->
 		<button
-			class="absolute top-4 -left-14 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-gray-800 text-xl text-white shadow-lg hover:bg-gray-700 max-md:hidden"
+			class="absolute top-4 -left-14 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-[#374151] text-xl text-white shadow-lg hover:bg-[#4b5563] max-md:hidden"
 			onclick={togglePanel}
 			aria-label={isPanelCollapsed ? 'Expand panel' : 'Collapse panel'}
 		>
@@ -209,10 +209,10 @@
 
 		{#if !isPanelCollapsed}
 			<!-- Panel Header -->
-			<div class="flex-none border-b border-gray-700 bg-gray-800 p-3">
+			<div class="flex-none border-b border-[#374151] bg-[#111827] p-3">
 				<div class="flex items-center justify-between">
 					<h2 class="text-lg font-bold">Scoring Panel</h2>
-					<button class="rounded-md bg-gray-700 px-2 py-1 text-xs hover:bg-gray-600 md:hidden" onclick={togglePanel}> Close </button>
+					<button class="rounded-md bg-[#888B95] px-2 py-1 text-xs hover:bg-[#6b6e76] md:hidden" onclick={togglePanel}> Close </button>
 				</div>
 
 				<!-- Difficulty and New Scenario Controls -->
@@ -230,7 +230,7 @@
 					</select>
 					<button
 						id="reload-button"
-						class="cursor-pointer rounded-md border-none bg-green-600 px-4 py-2 text-sm text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+						class="cursor-pointer rounded-md border-none bg-green-600 px-4 py-2 text-sm text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-[#888B95]"
 						onclick={reloadScenario}
 						disabled={isReloading}
 					>
@@ -243,11 +243,11 @@
 			<div class="flex-1 overflow-y-auto p-2">
 				<div class="grid grid-cols-2 gap-2">
 					{#each scoringItems as item, index}
-						<div class="rounded-lg bg-gray-800 p-2 shadow-md">
-							<div class="mb-1 text-[10px] leading-tight font-medium text-gray-300">
+						<div class="rounded-lg bg-[#374151] p-2 shadow-md">
+							<div class="mb-1 text-[10px] leading-tight font-medium text-gray-200">
 								{item.name}
 							</div>
-							<div class="mb-1 text-center text-[10px] text-gray-400">
+							<div class="mb-1 text-center text-[10px] text-[#888B95]">
 								{item.points} pts
 							</div>
 							<div class="flex items-center justify-center gap-1">
@@ -280,7 +280,7 @@
 			</div>
 
 			<!-- Score Display and Actions -->
-			<div class="flex-none border-t border-gray-700 bg-gray-800 p-3">
+			<div class="flex-none border-t border-[#374151] bg-[#111827] p-3">
 				<div class="mb-3 text-center">
 					<div
 						class="text-3xl font-bold"
@@ -296,7 +296,7 @@
 								<span class="font-semibold text-green-400">✓ Correct!</span>
 							{:else}
 								<span class="font-semibold text-red-400">✗ Incorrect</span>
-								<div class="mt-1 text-xs text-gray-400">Actual: {actualTotalScore} points</div>
+								<div class="mt-1 text-xs text-[#888B95]">Actual: {actualTotalScore} points</div>
 							{/if}
 						</div>
 					{/if}
@@ -304,13 +304,13 @@
 
 				<div class="flex gap-2">
 					<button
-						class="flex-1 rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold transition-colors hover:bg-blue-700 active:bg-blue-800"
+						class="flex-1 rounded-md bg-[#0076BB] px-3 py-2 text-sm font-semibold transition-colors hover:bg-[#005a91] active:bg-[#004570]"
 						onclick={toggleAnswer}
 					>
 						{showAnswer ? 'Hide' : 'Check'}
 					</button>
 					<button
-						class="flex-1 rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold transition-colors hover:bg-gray-700 active:bg-gray-800"
+						class="flex-1 rounded-md bg-[#888B95] px-3 py-2 text-sm font-semibold transition-colors hover:bg-[#6b6e76] active:bg-[#575a63]"
 						onclick={resetScoring}
 					>
 						Reset
