@@ -144,88 +144,88 @@ export class Scene {
 		// Pre-load all pin models
 		await Promise.all([
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
 				'RedPin'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'BluePin'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorOrange.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorOrange.mtl',
 				'OrangePin'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'Beam'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'Corner'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'Floor'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_FloorGoalSheet.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_FloorGoalSheet.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'FloorGoalSheet'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
 				'LoadZone Red'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'LoadZone Blue'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
 				'SquareGoal Red'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'SquareGoal Blue'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_StandoffGoal.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_StandoffGoal.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'StandoffGoal'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
 				'StartingPinSupport Red'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'StartingPinSupport Blue'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorRed.mtl',
 				'TriangleGoal Red'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
+				'/VIQRC-MixAndMatch-H2H-_-ColorBlue.mtl',
 				'TriangleGoal Blue'
 			),
 			this.modelLoader.loadModel(
-				'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj',
-				'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+				'/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj',
+				'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 				'Wall'
 			)
 		]);
@@ -242,8 +242,8 @@ export class Scene {
 		};
 
 		const modelName = colorMap[color];
-		const objPath = `/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj`;
-		const mtlPath = `/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`;
+		const objPath = `/VIQRC-MixAndMatch-H2H-_-GameObjects_Pin.obj`;
+		const mtlPath = `/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`;
 
 		// Load model (will use cache if already loaded)
 		const model = await this.modelLoader.loadModel(objPath, mtlPath, modelName);
@@ -267,8 +267,8 @@ export class Scene {
 	public async addBeam(position: THREE.Vector3, rotation: THREE.Euler = new THREE.Euler(0, 0, 0)): Promise<BeamObject> {
 		// Load beam model (will use cache if already loaded)
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_Beam.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'Beam'
 		);
 
@@ -288,8 +288,8 @@ export class Scene {
 
 	public async addFloor(position: THREE.Vector3) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_Floor.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'Floor'
 		);
 
@@ -306,8 +306,8 @@ export class Scene {
 
 	public async addWall(position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_Wall.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'Wall'
 		);
 		const wall = new WallObject(model);
@@ -322,8 +322,8 @@ export class Scene {
 
 	public async addCorner(position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_Corner.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'Corner'
 		);
 		const corner = new CornerObject(model);
@@ -338,8 +338,8 @@ export class Scene {
 
 	public async addFloorGoalSheet(position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_FloorGoalSheet.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_FloorGoalSheet.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'FloorGoalSheet'
 		);
 		const floorGoalSheet = new FloorGoalSheetObject(model);
@@ -354,8 +354,8 @@ export class Scene {
 
 	public async addStandoffGoal(position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_StandoffGoal.obj',
-			'/static/VIQRC-MixAndMatch-H2H-_-Common.mtl',
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_StandoffGoal.obj',
+			'/VIQRC-MixAndMatch-H2H-_-Common.mtl',
 			'StandoffGoal'
 		);
 		const standoffGoal = new StandoffGoalObject(model);
@@ -370,8 +370,8 @@ export class Scene {
 
 	public async addLoadZone(color: PinColor, position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
-			`/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_LoadZone.obj',
+			`/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
 			`LoadZone ${colorName[color]}`
 		);
 		const loadZone = new LoadZoneObject(model);
@@ -386,8 +386,8 @@ export class Scene {
 
 	public async addStartingPinSupport(color: PinColor, position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
-			`/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_StartingPinSupport.obj',
+			`/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
 			`StartingPinSupport ${colorName[color]}`
 		);
 		const startingPinSupport = new StartingPinSupportObject(model);
@@ -402,8 +402,8 @@ export class Scene {
 
 	public async addTriangleGoal(color: PinColor, position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
-			`/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_TriangleGoal.obj',
+			`/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
 			`TriangleGoal ${colorName[color]}`
 		);
 		const triangleGoal = new TriangleGoalObject(model);
@@ -418,8 +418,8 @@ export class Scene {
 
 	public async addSquareGoal(color: PinColor, position: THREE.Vector3, rotation: number) {
 		const model = await this.modelLoader.loadModel(
-			'/static/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
-			`/static/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
+			'/VIQRC-MixAndMatch-H2H-_-GameObjects_SquareGoal.obj',
+			`/VIQRC-MixAndMatch-H2H-_-Color${colorName[color]}.mtl`,
 			`SquareGoal ${colorName[color]}`
 		);
 		const squareGoal = new SquareGoalObject(model);
