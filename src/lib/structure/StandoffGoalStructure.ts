@@ -99,7 +99,7 @@ export class StandoffGoalOnlyBeamPlacedCase extends StandoffGoalCase {
 	public getScoring(): StructureScoring {
 		return {
 			connectedPins: 0,
-			connectedBeams: 0,
+			connectedBeams: 1,
 			twoColorStacks: 0,
 			threeColorStacks: 0,
 			matchingGoals: 0,
