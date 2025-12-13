@@ -7,7 +7,12 @@ import { FloorGoalEmptyCase, FloorGoalWithColumnsCase } from './structure/FloorG
 import { RedSquareGoalEmptyCase, RedSquareGoalWithOneColumnCase } from './structure/RedSquareGoal';
 import { RedTriangleGoalEmptyCase, RedTriangleGoalWithColumnsCase } from './structure/RedTriangleGoal';
 import { StacksOnFloorCase } from './structure/StacksOnFloorStructure';
-import { StandoffGoalBeamPlacedCase, StandoffGoalEmptyCase, StandoffGoalOneColumnCase } from './structure/StandoffGoalStructure';
+import {
+	StandoffGoalBeamPlacedCase,
+	StandoffGoalEmptyCase,
+	StandoffGoalOneColumnCase,
+	StandoffGoalOnlyBeamPlacedCase
+} from './structure/StandoffGoalStructure';
 import { StartingPinCase } from './structure/StartingPinStructure';
 
 export type Level = 'easy' | 'medium' | 'hard';
@@ -76,12 +81,16 @@ export function generateRandomStandoffGoalStructureCase(level: Level) {
 	if (level === 'easy') {
 		if (caseType < 0.5) {
 			return new StandoffGoalEmptyCase();
+		} else if (caseType < 0.75) {
+			return new StandoffGoalOnlyBeamPlacedCase();
 		} else {
 			return new StandoffGoalOneColumnCase(generatePins(1, 2));
 		}
 	} else {
-		if (caseType < 0.5) {
+		if (caseType < 0.4) {
 			return new StandoffGoalOneColumnCase(generatePins(1, 2));
+		} else if (caseType < 0.5) {
+			return new StandoffGoalOnlyBeamPlacedCase();
 		} else {
 			return new StandoffGoalBeamPlacedCase(generatePins(0, 2), generatePins(0, 2), generatePins(0, 2));
 		}
